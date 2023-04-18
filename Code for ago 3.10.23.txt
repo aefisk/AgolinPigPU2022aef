@@ -1,0 +1,1470 @@
+End of banner message from server
+Keyboard-interactive authentication prompts from server:
+| Password:
+End of keyboard-interactive prompts from server
+Last login: Fri Mar 10 09:50:38 2023 from pal-nat186-23-255.itap.purdue.edu
+=============================================================================
+==                    Welcome to the Bell Cluster                          ==
+==                                                                         ==
+==    Bell consists of:                                                    ==
+==                                                                         ==
+==    Nodes:                                                               ==
+==    Bell-A    ppn=128    256 GB memory                                   ==
+==    Bell-B    ppn=128    1 TB   memory                                   ==
+==    Bell-G    ppn=128    256 GB memory 2x AMD MI50 32GB                  ==
+==    Bell-X    ppn=48     384 GB memory 6x AMD MI50 32GB                  ==
+==                                                                         ==
+==    Scratch:                                                             ==
+==    Quota: 200 TB / 2 million files                                      ==
+==    Path: $CLUSTER_SCRATCH                                               ==
+==    Type command: "myquota"                                              ==
+==                                                                         ==
+==    Queues:                                                              ==
+==    Type command: "qlist"                                                ==
+==                                                                         ==
+==    Software:                                                            ==
+==    Type command: "module avail" or "module spider"                      ==
+==                                                                         ==
+==    User guide:                                                          ==
+==    www.rcac.purdue.edu/knowledge/bell                                   ==
+==                                                                         ==
+==    Help:                                                                ==
+==    www.rcac.purdue.edu/help                                             ==
+==                                                                         ==
+==    News:                                                                ==
+==    www.rcac.purdue.edu/news/Bell                                        ==
+==                                                                         ==
+=============================================================================
+fiska@bell-fe02:~ $ sinteractive -A microbiome -t 1:00:00 -n4
+salloc: Pending job allocation 24121504
+salloc: job 24121504 queued and waiting for resources
+salloc: job 24121504 has been allocated resources
+salloc: Granted job allocation 24121504
+salloc: Waiting for resource configuration
+salloc: Nodes bell-a383 are ready for job
+bash-4.2$ cd /scratch/bell/fiska/Agolin
+bash-4.2$ module load bioinfo
+This software stack is maintained by the Purdue Bioinformatics Core. Please direct inquiries
+regarding Bioinformatics software to bioinformatics@purdue.edu
+bash-4.2$ module load Qiime/2-2022.8
+bash-4.2$ module list
+
+Currently Loaded Modules:
+  1) gmp/6.1.2    3) mpc/1.1.0     5) gcc/9.3.0       7) xalt/1.1.2 (S)   9) bioinfo
+  2) mpfr/3.1.6   4) zlib/1.2.11   6) openmpi/3.1.6   8) rcac            10) Qiime/2-2022.8
+
+  Where:
+   S:  Module is Sticky, requires --force to unload or purge
+
+
+
+bash-4.2$ qiime tools import \\
+Usage: qiime tools import [OPTIONS]
+
+  Import data to create a new QIIME 2 Artifact. See https://docs.qiime2.org/
+  for usage examples and details on the file types and associated semantic
+  types that can be imported.
+
+Options:
+  --type TEXT             The semantic type of the artifact that will be
+                          created upon importing. Use --show-importable-types
+                          to see what importable semantic types are available
+                          in the current deployment.                [required]
+  --input-path PATH       Path to file or directory that should be imported.
+                                                                    [required]
+  --output-path ARTIFACT  Path where output artifact should be written.
+                                                                    [required]
+  --input-format TEXT     The format of the data to be imported. If not
+                          provided, data must be in the format expected by the
+                          semantic type provided via --type.
+  --show-importable-types Show the semantic types that can be supplied to
+                          --type to import data into an artifact.
+  --show-importable-formats
+                          Show formats that can be supplied to --input-format
+                          to import data into an artifact.
+  --help                  Show this message and exit.
+
+                  There were some problems with the command:
+ (1/4) Missing option '--type'.
+ (2/4) Missing option '--input-path'.
+ (3/4) Missing option '--output-path'.
+ (4/4) Got unexpected extra argument (\)
+bash-4.2$   --type EMPSingleEndSequences \
+> c,
+bash: --type: command not found
+bash-4.2$ qiime tools import \
+> --type EMPSingleEndSequences \
+> --input-path fastq_files \
+> --output-path emp-single-end-sequences.qza
+There was a problem importing fastq_files:
+
+  Missing one or more files for EMPSingleEndDirFmt: 'sequences.fastq.gz'
+
+bash-4.2$ ls fastq_files/
+063876_P5Mock_S148_run976_L001_R1_001.fastq.gz
+063876_P5Mock_S148_run976_L001_R2_001.fastq.gz
+063877_P5Water_S149_run976_L001_R1_001.fastq.gz
+063877_P5Water_S149_run976_L001_R2_001.fastq.gz
+063972_P6Mock_S244_run976_L001_R1_001.fastq.gz
+063972_P6Mock_S244_run976_L001_R2_001.fastq.gz
+063973_P6Water_S245_run976_L001_R1_001.fastq.gz
+063973_P6Water_S245_run976_L001_R2_001.fastq.gz
+063974_CONS37P4B14_S246_run976_L001_R1_001.fastq.gz
+063974_CONS37P4B14_S246_run976_L001_R2_001.fastq.gz
+063975_AGOS38P1B14_S247_run976_L001_R1_001.fastq.gz
+063975_AGOS38P1B14_S247_run976_L001_R2_001.fastq.gz
+063976_CONS39P1B14_S248_run976_L001_R1_001.fastq.gz
+063976_CONS39P1B14_S248_run976_L001_R2_001.fastq.gz
+063977_CONS41P1B14_S249_run976_L001_R1_001.fastq.gz
+063977_CONS41P1B14_S249_run976_L001_R2_001.fastq.gz
+063978_AGOS42P6B14_S250_run976_L001_R1_001.fastq.gz
+063978_AGOS42P6B14_S250_run976_L001_R2_001.fastq.gz
+063979_CONS43P5B14_S251_run976_L001_R1_001.fastq.gz
+063979_CONS43P5B14_S251_run976_L001_R2_001.fastq.gz
+063980_AGOS44P4B14_S252_run976_L001_R1_001.fastq.gz
+063980_AGOS44P4B14_S252_run976_L001_R2_001.fastq.gz
+063981_CONS45P2B14_S253_run976_L001_R1_001.fastq.gz
+063981_CONS45P2B14_S253_run976_L001_R2_001.fastq.gz
+063982_AGOS46P1B14_S254_run976_L001_R1_001.fastq.gz
+063982_AGOS46P1B14_S254_run976_L001_R2_001.fastq.gz
+063983_CONS47P6B14_S255_run976_L001_R1_001.fastq.gz
+063983_CONS47P6B14_S255_run976_L001_R2_001.fastq.gz
+063984_AGOS48P4B14_S256_run976_L001_R1_001.fastq.gz
+063984_AGOS48P4B14_S256_run976_L001_R2_001.fastq.gz
+063985_CONS49P6B14_S257_run976_L001_R1_001.fastq.gz
+063985_CONS49P6B14_S257_run976_L001_R2_001.fastq.gz
+063986_AGOS50P1B14_S258_run976_L001_R1_001.fastq.gz
+063986_AGOS50P1B14_S258_run976_L001_R2_001.fastq.gz
+063987_CONS51P3B14_S259_run976_L001_R1_001.fastq.gz
+063987_CONS51P3B14_S259_run976_L001_R2_001.fastq.gz
+063988_CONS52P4B14_S260_run976_L001_R1_001.fastq.gz
+063988_CONS52P4B14_S260_run976_L001_R2_001.fastq.gz
+063989_AGOS53P1B14_S261_run976_L001_R1_001.fastq.gz
+063989_AGOS53P1B14_S261_run976_L001_R2_001.fastq.gz
+063990_AGOS54P5B14_S262_run976_L001_R1_001.fastq.gz
+063990_AGOS54P5B14_S262_run976_L001_R2_001.fastq.gz
+063991_CONS55P5B14_S263_run976_L001_R1_001.fastq.gz
+063991_CONS55P5B14_S263_run976_L001_R2_001.fastq.gz
+063992_AGOS56P1B14_S264_run976_L001_R1_001.fastq.gz
+063992_AGOS56P1B14_S264_run976_L001_R2_001.fastq.gz
+063993_AGOS57P4B14_S265_run976_L001_R1_001.fastq.gz
+063993_AGOS57P4B14_S265_run976_L001_R2_001.fastq.gz
+063994_AGOS58P6B14_S266_run976_L001_R1_001.fastq.gz
+063994_AGOS58P6B14_S266_run976_L001_R2_001.fastq.gz
+063995_CONS59P1B14_S267_run976_L001_R1_001.fastq.gz
+063995_CONS59P1B14_S267_run976_L001_R2_001.fastq.gz
+063996_AGOS60P3B14_S268_run976_L001_R1_001.fastq.gz
+063996_AGOS60P3B14_S268_run976_L001_R2_001.fastq.gz
+063997_CONS61P4B14_S269_run976_L001_R1_001.fastq.gz
+063997_CONS61P4B14_S269_run976_L001_R2_001.fastq.gz
+063998_CONS62P1B14_S270_run976_L001_R1_001.fastq.gz
+063998_CONS62P1B14_S270_run976_L001_R2_001.fastq.gz
+063999_CONS37P4B7_S271_run976_L001_R1_001.fastq.gz
+063999_CONS37P4B7_S271_run976_L001_R2_001.fastq.gz
+064000_AGOS38P1B7_S272_run976_L001_R1_001.fastq.gz
+064000_AGOS38P1B7_S272_run976_L001_R2_001.fastq.gz
+064001_CONS39P1B7_S273_run976_L001_R1_001.fastq.gz
+064001_CONS39P1B7_S273_run976_L001_R2_001.fastq.gz
+064002_CONS41P1B7_S274_run976_L001_R1_001.fastq.gz
+064002_CONS41P1B7_S274_run976_L001_R2_001.fastq.gz
+064003_AGOS42P6B7_S275_run976_L001_R1_001.fastq.gz
+064003_AGOS42P6B7_S275_run976_L001_R2_001.fastq.gz
+064004_CONS43P5B7_S276_run976_L001_R1_001.fastq.gz
+064004_CONS43P5B7_S276_run976_L001_R2_001.fastq.gz
+064005_AGOS44P4B7_S277_run976_L001_R1_001.fastq.gz
+064005_AGOS44P4B7_S277_run976_L001_R2_001.fastq.gz
+064006_CONS45P2B7_S278_run976_L001_R1_001.fastq.gz
+064006_CONS45P2B7_S278_run976_L001_R2_001.fastq.gz
+064007_AGOS46P1B7_S279_run976_L001_R1_001.fastq.gz
+064007_AGOS46P1B7_S279_run976_L001_R2_001.fastq.gz
+064008_CONS47P6B7_S280_run976_L001_R1_001.fastq.gz
+064008_CONS47P6B7_S280_run976_L001_R2_001.fastq.gz
+064009_AGOS48P4B7_S281_run976_L001_R1_001.fastq.gz
+064009_AGOS48P4B7_S281_run976_L001_R2_001.fastq.gz
+064010_CONS49P6B7_S282_run976_L001_R1_001.fastq.gz
+064010_CONS49P6B7_S282_run976_L001_R2_001.fastq.gz
+064011_AGOS50P1B7_S283_run976_L001_R1_001.fastq.gz
+064011_AGOS50P1B7_S283_run976_L001_R2_001.fastq.gz
+064012_CONS51P3B7_S284_run976_L001_R1_001.fastq.gz
+064012_CONS51P3B7_S284_run976_L001_R2_001.fastq.gz
+064013_CONS52P4B7_S285_run976_L001_R1_001.fastq.gz
+064013_CONS52P4B7_S285_run976_L001_R2_001.fastq.gz
+064014_AGOS53P1B7_S286_run976_L001_R1_001.fastq.gz
+064014_AGOS53P1B7_S286_run976_L001_R2_001.fastq.gz
+064015_AGOS54P5B7_S287_run976_L001_R1_001.fastq.gz
+064015_AGOS54P5B7_S287_run976_L001_R2_001.fastq.gz
+064016_CONS55P5B7_S288_run976_L001_R1_001.fastq.gz
+064016_CONS55P5B7_S288_run976_L001_R2_001.fastq.gz
+064017_AGOS56P1B7_S289_run976_L001_R1_001.fastq.gz
+064017_AGOS56P1B7_S289_run976_L001_R2_001.fastq.gz
+064018_AGOS57P4B7_S290_run976_L001_R1_001.fastq.gz
+064018_AGOS57P4B7_S290_run976_L001_R2_001.fastq.gz
+064019_AGOS58P6B7_S291_run976_L001_R1_001.fastq.gz
+064019_AGOS58P6B7_S291_run976_L001_R2_001.fastq.gz
+064020_CONS59P1B7_S292_run976_L001_R1_001.fastq.gz
+064020_CONS59P1B7_S292_run976_L001_R2_001.fastq.gz
+064021_AGOS60P3B7_S293_run976_L001_R1_001.fastq.gz
+064021_AGOS60P3B7_S293_run976_L001_R2_001.fastq.gz
+064022_CONS61P4B7_S294_run976_L001_R1_001.fastq.gz
+064022_CONS61P4B7_S294_run976_L001_R2_001.fastq.gz
+064023_CONS62P1B7_S295_run976_L001_R1_001.fastq.gz
+064023_CONS62P1B7_S295_run976_L001_R2_001.fastq.gz
+064024_CONS37P4A0_S296_run976_L001_R1_001.fastq.gz
+064024_CONS37P4A0_S296_run976_L001_R2_001.fastq.gz
+064025_AGOS38P1A0_S297_run976_L001_R1_001.fastq.gz
+064025_AGOS38P1A0_S297_run976_L001_R2_001.fastq.gz
+064026_CONS39P1A0_S298_run976_L001_R1_001.fastq.gz
+064026_CONS39P1A0_S298_run976_L001_R2_001.fastq.gz
+064027_CONS41P1A0_S299_run976_L001_R1_001.fastq.gz
+064027_CONS41P1A0_S299_run976_L001_R2_001.fastq.gz
+064028_AGOS42P6A0_S300_run976_L001_R1_001.fastq.gz
+064028_AGOS42P6A0_S300_run976_L001_R2_001.fastq.gz
+064029_CONS43P5A0_S301_run976_L001_R1_001.fastq.gz
+064029_CONS43P5A0_S301_run976_L001_R2_001.fastq.gz
+064030_AGOS44P4A0_S302_run976_L001_R1_001.fastq.gz
+064030_AGOS44P4A0_S302_run976_L001_R2_001.fastq.gz
+064031_CONS45P2A0_S303_run976_L001_R1_001.fastq.gz
+064031_CONS45P2A0_S303_run976_L001_R2_001.fastq.gz
+064032_AGOS46P1A0_S304_run976_L001_R1_001.fastq.gz
+064032_AGOS46P1A0_S304_run976_L001_R2_001.fastq.gz
+064033_CONS47P6A0_S305_run976_L001_R1_001.fastq.gz
+064033_CONS47P6A0_S305_run976_L001_R2_001.fastq.gz
+064034_AGOS48P4A0_S306_run976_L001_R1_001.fastq.gz
+064034_AGOS48P4A0_S306_run976_L001_R2_001.fastq.gz
+064035_AlyxP1Mock_S307_run976_L001_R1_001.fastq.gz
+064035_AlyxP1Mock_S307_run976_L001_R2_001.fastq.gz
+064036_AlyxP2Water_S308_run976_L001_R1_001.fastq.gz
+064036_AlyxP2Water_S308_run976_L001_R2_001.fastq.gz
+064037_CONS49P6A0_S309_run976_L001_R1_001.fastq.gz
+064037_CONS49P6A0_S309_run976_L001_R2_001.fastq.gz
+064038_CONS51P3A0_S310_run976_L001_R1_001.fastq.gz
+064038_CONS51P3A0_S310_run976_L001_R2_001.fastq.gz
+064039_CONS52P4A0_S311_run976_L001_R1_001.fastq.gz
+064039_CONS52P4A0_S311_run976_L001_R2_001.fastq.gz
+064040_CONS55P5A0_S312_run976_L001_R1_001.fastq.gz
+064040_CONS55P5A0_S312_run976_L001_R2_001.fastq.gz
+064041_AGOS56P1A0_S313_run976_L001_R1_001.fastq.gz
+064041_AGOS56P1A0_S313_run976_L001_R2_001.fastq.gz
+064042_AGOS57P4A0_S314_run976_L001_R1_001.fastq.gz
+064042_AGOS57P4A0_S314_run976_L001_R2_001.fastq.gz
+064043_AGOS58P6A0_S315_run976_L001_R1_001.fastq.gz
+064043_AGOS58P6A0_S315_run976_L001_R2_001.fastq.gz
+064044_CONS59P1A0_S316_run976_L001_R1_001.fastq.gz
+064044_CONS59P1A0_S316_run976_L001_R2_001.fastq.gz
+064045_AGOS60P3A0_S317_run976_L001_R1_001.fastq.gz
+064045_AGOS60P3A0_S317_run976_L001_R2_001.fastq.gz
+064046_CONS61P4A0_S318_run976_L001_R1_001.fastq.gz
+064046_CONS61P4A0_S318_run976_L001_R2_001.fastq.gz
+064047_CONS62P1A0_S319_run976_L001_R1_001.fastq.gz
+064047_CONS62P1A0_S319_run976_L001_R2_001.fastq.gz
+064048_CONS37P4A8_S320_run976_L001_R1_001.fastq.gz
+064048_CONS37P4A8_S320_run976_L001_R2_001.fastq.gz
+064049_AGOS38P1A8_S321_run976_L001_R1_001.fastq.gz
+064049_AGOS38P1A8_S321_run976_L001_R2_001.fastq.gz
+064050_CONS39P1A8_S322_run976_L001_R1_001.fastq.gz
+064050_CONS39P1A8_S322_run976_L001_R2_001.fastq.gz
+064051_CONS41P1A8_S323_run976_L001_R1_001.fastq.gz
+064051_CONS41P1A8_S323_run976_L001_R2_001.fastq.gz
+064052_AGOS42P6A8_S324_run976_L001_R1_001.fastq.gz
+064052_AGOS42P6A8_S324_run976_L001_R2_001.fastq.gz
+064053_CONS43P5A8_S325_run976_L001_R1_001.fastq.gz
+064053_CONS43P5A8_S325_run976_L001_R2_001.fastq.gz
+064054_AGOS44P4A8_S326_run976_L001_R1_001.fastq.gz
+064054_AGOS44P4A8_S326_run976_L001_R2_001.fastq.gz
+064055_CONS45P2A8_S327_run976_L001_R1_001.fastq.gz
+064055_CONS45P2A8_S327_run976_L001_R2_001.fastq.gz
+064056_AGOS46P1A8_S328_run976_L001_R1_001.fastq.gz
+064056_AGOS46P1A8_S328_run976_L001_R2_001.fastq.gz
+064057_CONS47P6A8_S329_run976_L001_R1_001.fastq.gz
+064057_CONS47P6A8_S329_run976_L001_R2_001.fastq.gz
+064058_AGOS48P4A8_S330_run976_L001_R1_001.fastq.gz
+064058_AGOS48P4A8_S330_run976_L001_R2_001.fastq.gz
+064059_CONS49P6A8_S331_run976_L001_R1_001.fastq.gz
+064059_CONS49P6A8_S331_run976_L001_R2_001.fastq.gz
+064060_AGOS50P1A8_S332_run976_L001_R1_001.fastq.gz
+064060_AGOS50P1A8_S332_run976_L001_R2_001.fastq.gz
+064061_CONS51P3A8_S333_run976_L001_R1_001.fastq.gz
+064061_CONS51P3A8_S333_run976_L001_R2_001.fastq.gz
+064062_CONS52P4A8_S334_run976_L001_R1_001.fastq.gz
+064062_CONS52P4A8_S334_run976_L001_R2_001.fastq.gz
+064063_AGOS53P1A8_S335_run976_L001_R1_001.fastq.gz
+064063_AGOS53P1A8_S335_run976_L001_R2_001.fastq.gz
+064064_AGOS54P5A8_S336_run976_L001_R1_001.fastq.gz
+064064_AGOS54P5A8_S336_run976_L001_R2_001.fastq.gz
+064065_CONS55P5A8_S337_run976_L001_R1_001.fastq.gz
+064065_CONS55P5A8_S337_run976_L001_R2_001.fastq.gz
+064066_AGOS56P1A8_S338_run976_L001_R1_001.fastq.gz
+064066_AGOS56P1A8_S338_run976_L001_R2_001.fastq.gz
+064067_AGOS57P4A8_S339_run976_L001_R1_001.fastq.gz
+064067_AGOS57P4A8_S339_run976_L001_R2_001.fastq.gz
+064068_AGOS58P6A8_S340_run976_L001_R1_001.fastq.gz
+064068_AGOS58P6A8_S340_run976_L001_R2_001.fastq.gz
+064069_CONS59P1A8_S341_run976_L001_R1_001.fastq.gz
+064069_CONS59P1A8_S341_run976_L001_R2_001.fastq.gz
+064070_AGOS60P3A8_S342_run976_L001_R1_001.fastq.gz
+064070_AGOS60P3A8_S342_run976_L001_R2_001.fastq.gz
+064071_CONS61P4A8_S343_run976_L001_R1_001.fastq.gz
+064071_CONS61P4A8_S343_run976_L001_R2_001.fastq.gz
+064072_CONS62P1A8_S344_run976_L001_R1_001.fastq.gz
+064072_CONS62P1A8_S344_run976_L001_R2_001.fastq.gz
+064073_CONS37P4A16_S345_run976_L001_R1_001.fastq.gz
+064073_CONS37P4A16_S345_run976_L001_R2_001.fastq.gz
+064074_AGOS38P1A16_S346_run976_L001_R1_001.fastq.gz
+064074_AGOS38P1A16_S346_run976_L001_R2_001.fastq.gz
+064075_CONS39P1A16_S347_run976_L001_R1_001.fastq.gz
+064075_CONS39P1A16_S347_run976_L001_R2_001.fastq.gz
+064076_CONS41P1A16_S348_run976_L001_R1_001.fastq.gz
+064076_CONS41P1A16_S348_run976_L001_R2_001.fastq.gz
+064077_AGOS42P6A16_S349_run976_L001_R1_001.fastq.gz
+064077_AGOS42P6A16_S349_run976_L001_R2_001.fastq.gz
+064078_CONS43P5A16_S350_run976_L001_R1_001.fastq.gz
+064078_CONS43P5A16_S350_run976_L001_R2_001.fastq.gz
+064079_AGOS44P4A16_S351_run976_L001_R1_001.fastq.gz
+064079_AGOS44P4A16_S351_run976_L001_R2_001.fastq.gz
+064080_CONS45P2A16_S352_run976_L001_R1_001.fastq.gz
+064080_CONS45P2A16_S352_run976_L001_R2_001.fastq.gz
+064081_AGOS46P1A16_S353_run976_L001_R1_001.fastq.gz
+064081_AGOS46P1A16_S353_run976_L001_R2_001.fastq.gz
+064082_CONS47P6A16_S354_run976_L001_R1_001.fastq.gz
+064082_CONS47P6A16_S354_run976_L001_R2_001.fastq.gz
+064083_AGOS48P4A16_S355_run976_L001_R1_001.fastq.gz
+064083_AGOS48P4A16_S355_run976_L001_R2_001.fastq.gz
+064084_CONS49P6A16_S356_run976_L001_R1_001.fastq.gz
+064084_CONS49P6A16_S356_run976_L001_R2_001.fastq.gz
+064085_AGOS50P1A16_S357_run976_L001_R1_001.fastq.gz
+064085_AGOS50P1A16_S357_run976_L001_R2_001.fastq.gz
+064086_CONS51P3A16_S358_run976_L001_R1_001.fastq.gz
+064086_CONS51P3A16_S358_run976_L001_R2_001.fastq.gz
+064087_CONS52P4A16_S359_run976_L001_R1_001.fastq.gz
+064087_CONS52P4A16_S359_run976_L001_R2_001.fastq.gz
+064088_AGOS53P1A16_S360_run976_L001_R1_001.fastq.gz
+064088_AGOS53P1A16_S360_run976_L001_R2_001.fastq.gz
+064089_AGOS54P5A16_S361_run976_L001_R1_001.fastq.gz
+064089_AGOS54P5A16_S361_run976_L001_R2_001.fastq.gz
+064090_CONS55P5A16_S362_run976_L001_R1_001.fastq.gz
+064090_CONS55P5A16_S362_run976_L001_R2_001.fastq.gz
+064091_AGOS56P1A16_S363_run976_L001_R1_001.fastq.gz
+064091_AGOS56P1A16_S363_run976_L001_R2_001.fastq.gz
+064092_AGOS57P4A16_S364_run976_L001_R1_001.fastq.gz
+064092_AGOS57P4A16_S364_run976_L001_R2_001.fastq.gz
+064093_AGOS58P6A16_S365_run976_L001_R1_001.fastq.gz
+064093_AGOS58P6A16_S365_run976_L001_R2_001.fastq.gz
+064094_CONS59P1A16_S366_run976_L001_R1_001.fastq.gz
+064094_CONS59P1A16_S366_run976_L001_R2_001.fastq.gz
+064095_AGOS60P3A16_S367_run976_L001_R1_001.fastq.gz
+064095_AGOS60P3A16_S367_run976_L001_R2_001.fastq.gz
+064096_CONS61P4A16_S368_run976_L001_R1_001.fastq.gz
+064096_CONS61P4A16_S368_run976_L001_R2_001.fastq.gz
+064097_CONS62P1A16_S369_run976_L001_R1_001.fastq.gz
+064097_CONS62P1A16_S369_run976_L001_R2_001.fastq.gz
+064098_AlyxP2Mock_S370_run976_L001_R1_001.fastq.gz
+064098_AlyxP2Mock_S370_run976_L001_R2_001.fastq.gz
+064099_AlyxP2Water_S371_run976_run976_L001_R1_001.fastq.gz
+064099_AlyxP2Water_S371_run976_run976_L001_R2_001.fastq.gz
+bash-4.2$ ls
+agolin_manifest.txt         demux.qzv                    rooted-tree.qza
+Agolin-sample-metadata.tsv  fastq_files                  stats-dada2.qza
+aligned-rep-seqs.qza        fastq.gz                     stats-dada2.qzv
+alpha-rarefaction.qzv       masked-aligned-rep-seqs.qza  table-dada2.qza
+core-metrics-results        rep-seqs-dada2.qza           table.qzv
+demux.qza                   rep-seqs.qzv                 unrooted-tree.qza
+bash-4.2$ rm fastq.gz
+bash-4.2$ curl -o fastq.qz https://drive.google.com/drive/folders/1r_qahAfNANC8LopkGYFGr1Vt87ZlWZ_M?usp=share_link
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  540k    0  540k    0     0  1048k      0 --:--:-- --:--:-- --:--:-- 1049k
+bash-4.2$ ls
+agolin_manifest.txt         demux.qzv                    rooted-tree.qza
+Agolin-sample-metadata.tsv  fastq_files                  stats-dada2.qza
+aligned-rep-seqs.qza        fastq.qz                     stats-dada2.qzv
+alpha-rarefaction.qzv       masked-aligned-rep-seqs.qza  table-dada2.qza
+core-metrics-results        rep-seqs-dada2.qza           table.qzv
+demux.qza                   rep-seqs.qzv                 unrooted-tree.qza
+bash-4.2$ cd ..
+bash-4.2$ ls
+Agolin  data_download  Exam  qiime  unix_tutorial
+bash-4.2$ data_download
+bash: data_download: command not found
+bash-4.2$ las data_download/
+bash: las: command not found
+bash-4.2$ ls data_download/
+raw  seq  SraAccList.csv  SraAccList-short.csv  use-scheduler
+bash-4.2$ mv -r data_download Agolin
+mv: invalid option -- 'r'
+Try 'mv --help' for more information.
+bash-4.2$ qiime tools import \
+> --type 'SampleData[PairedEndSequencesWithQuality]' \
+> --input-path Agolin/Agolin-sample-manifest.tsv \
+> --input-format PairedEndFastqManifestPhred33V2 \
+> --output-path demux.qza
+Usage: qiime tools import [OPTIONS]
+
+  Import data to create a new QIIME 2 Artifact. See https://docs.qiime2.org/
+  for usage examples and details on the file types and associated semantic
+  types that can be imported.
+
+Options:
+  --type TEXT             The semantic type of the artifact that will be
+                          created upon importing. Use --show-importable-types
+                          to see what importable semantic types are available
+                          in the current deployment.                [required]
+  --input-path PATH       Path to file or directory that should be imported.
+                                                                    [required]
+  --output-path ARTIFACT  Path where output artifact should be written.
+                                                                    [required]
+  --input-format TEXT     The format of the data to be imported. If not
+                          provided, data must be in the format expected by the
+                          semantic type provided via --type.
+  --show-importable-types Show the semantic types that can be supplied to
+                          --type to import data into an artifact.
+  --show-importable-formats
+                          Show formats that can be supplied to --input-format
+                          to import data into an artifact.
+  --help                  Show this message and exit.
+
+                    There was a problem with the command:
+ (1/1) Invalid value for '--input-path': Path 'Agolin/Agolin-sample-
+  manifest.tsv' does not exist.
+bash-4.2$ cd Agolin/
+bash-4.2$ ls
+agolin_manifest.txt         demux.qzv                    rooted-tree.qza
+Agolin-sample-metadata.tsv  fastq_files                  stats-dada2.qza
+aligned-rep-seqs.qza        fastq.qz                     stats-dada2.qzv
+alpha-rarefaction.qzv       masked-aligned-rep-seqs.qza  table-dada2.qza
+core-metrics-results        rep-seqs-dada2.qza           table.qzv
+demux.qza                   rep-seqs.qzv                 unrooted-tree.qza
+bash-4.2$ cd ..
+bash-4.2$ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' --input-path Agolin/Agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+Usage: qiime tools import [OPTIONS]
+
+  Import data to create a new QIIME 2 Artifact. See https://docs.qiime2.org/
+  for usage examples and details on the file types and associated semantic
+  types that can be imported.
+
+Options:
+  --type TEXT             The semantic type of the artifact that will be
+                          created upon importing. Use --show-importable-types
+                          to see what importable semantic types are available
+                          in the current deployment.                [required]
+  --input-path PATH       Path to file or directory that should be imported.
+                                                                    [required]
+  --output-path ARTIFACT  Path where output artifact should be written.
+                                                                    [required]
+  --input-format TEXT     The format of the data to be imported. If not
+                          provided, data must be in the format expected by the
+                          semantic type provided via --type.
+  --show-importable-types Show the semantic types that can be supplied to
+                          --type to import data into an artifact.
+  --show-importable-formats
+                          Show formats that can be supplied to --input-format
+                          to import data into an artifact.
+  --help                  Show this message and exit.
+
+                    There was a problem with the command:
+ (1/1) Invalid value for '--input-path': Path 'Agolin/Agolin_manifest.txt'
+  does not exist.
+bash-4.2$ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' --input-path Agolin/agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+There was a problem importing Agolin/agolin_manifest.txt:
+
+  Agolin/agolin_manifest.txt is not a(n) PairedEndFastqManifestPhred33V2 file:
+
+  Filepath on line 1 and column "forward-absolute-filepath" could not be found (/scratch/bell/fiska/Agolin/063974_CONS37P4B14_S246_run976_L001_R1_001.fastq.gz) for sample "CONS37P4B14".
+
+bash-4.2$ qiime tools import --type 'SampleData[SingleEndSequencesWithQuality]' --input-path Agolin/Agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+Usage: qiime tools import [OPTIONS]
+
+  Import data to create a new QIIME 2 Artifact. See https://docs.qiime2.org/
+  for usage examples and details on the file types and associated semantic
+  types that can be imported.
+
+Options:
+  --type TEXT             The semantic type of the artifact that will be
+                          created upon importing. Use --show-importable-types
+                          to see what importable semantic types are available
+                          in the current deployment.                [required]
+  --input-path PATH       Path to file or directory that should be imported.
+                                                                    [required]
+  --output-path ARTIFACT  Path where output artifact should be written.
+                                                                    [required]
+  --input-format TEXT     The format of the data to be imported. If not
+                          provided, data must be in the format expected by the
+                          semantic type provided via --type.
+  --show-importable-types Show the semantic types that can be supplied to
+                          --type to import data into an artifact.
+  --show-importable-formats
+                          Show formats that can be supplied to --input-format
+                          to import data into an artifact.
+  --help                  Show this message and exit.
+
+                    There was a problem with the command:
+ (1/1) Invalid value for '--input-path': Path 'Agolin/Agolin_manifest.txt'
+  does not exist.
+bash-4.2$ qiime tools import --type 'SampleData[SingleEndSequencesWithQuality]' --input-path Agolin/Aagolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+Usage: qiime tools import [OPTIONS]
+
+  Import data to create a new QIIME 2 Artifact. See https://docs.qiime2.org/
+  for usage examples and details on the file types and associated semantic
+  types that can be imported.
+
+Options:
+  --type TEXT             The semantic type of the artifact that will be
+                          created upon importing. Use --show-importable-types
+                          to see what importable semantic types are available
+                          in the current deployment.                [required]
+  --input-path PATH       Path to file or directory that should be imported.
+                                                                    [required]
+  --output-path ARTIFACT  Path where output artifact should be written.
+                                                                    [required]
+  --input-format TEXT     The format of the data to be imported. If not
+                          provided, data must be in the format expected by the
+                          semantic type provided via --type.
+  --show-importable-types Show the semantic types that can be supplied to
+                          --type to import data into an artifact.
+  --show-importable-formats
+                          Show formats that can be supplied to --input-format
+                          to import data into an artifact.
+  --help                  Show this message and exit.
+
+                    There was a problem with the command:
+ (1/1) Invalid value for '--input-path': Path 'Agolin/Aagolin_manifest.txt'
+  does not exist.
+bash-4.2$ qiime tools import --type 'SampleData[SingleEndSequencesWithQuality]' --input-path Agolin/agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+Traceback (most recent call last):
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/q2cli/builtin/tools.py", line 157, in import_data
+    artifact = qiime2.sdk.Artifact.import_data(type, input_path,
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/qiime2/sdk/result.py", line 299, in import_data
+    return cls._from_view(type_, view, view_type, provenance_capture,
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/qiime2/sdk/result.py", line 315, in _from_view
+    output_dir_fmt = pm.get_directory_format(type)
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/qiime2/sdk/plugin_manager.py", line 354, in get_directory_format
+    raise TypeError(
+TypeError: Semantic type SampleData[SingleEndSequencesWithQuality] does not have a compatible directory format.
+
+An unexpected error has occurred:
+
+  Semantic type SampleData[SingleEndSequencesWithQuality] does not have a compatible directory format.
+
+See above for debug info.
+bash-4.2$ module load Qiime/2-2022.8
+bash-4.2$ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' --input-path Agolin/agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+There was a problem importing Agolin/agolin_manifest.txt:
+
+  Agolin/agolin_manifest.txt is not a(n) PairedEndFastqManifestPhred33V2 file:
+
+  Filepath on line 1 and column "forward-absolute-filepath" could not be found (/scratch/bell/fiska/Agolin/063974_CONS37P4B14_S246_run976_L001_R1_001.fastq.gz) for sample "CONS37P4B14".
+
+bash-4.2$ pwd
+/scratch/bell/fiska
+bash-4.2$ cd Agolin
+bash-4.2$ cd fastq_files/
+bash-4.2$ ls -1 "$PWD/"*R1*
+/scratch/bell/fiska/Agolin/fastq_files/063876_P5Mock_S148_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063877_P5Water_S149_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063972_P6Mock_S244_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063973_P6Water_S245_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063974_CONS37P4B14_S246_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063975_AGOS38P1B14_S247_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063976_CONS39P1B14_S248_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063977_CONS41P1B14_S249_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063978_AGOS42P6B14_S250_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063979_CONS43P5B14_S251_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063980_AGOS44P4B14_S252_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063981_CONS45P2B14_S253_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063982_AGOS46P1B14_S254_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063983_CONS47P6B14_S255_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063984_AGOS48P4B14_S256_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063985_CONS49P6B14_S257_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063986_AGOS50P1B14_S258_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063987_CONS51P3B14_S259_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063988_CONS52P4B14_S260_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063989_AGOS53P1B14_S261_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063990_AGOS54P5B14_S262_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063991_CONS55P5B14_S263_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063992_AGOS56P1B14_S264_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063993_AGOS57P4B14_S265_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063994_AGOS58P6B14_S266_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063995_CONS59P1B14_S267_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063996_AGOS60P3B14_S268_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063997_CONS61P4B14_S269_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063998_CONS62P1B14_S270_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063999_CONS37P4B7_S271_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064000_AGOS38P1B7_S272_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064001_CONS39P1B7_S273_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064002_CONS41P1B7_S274_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064003_AGOS42P6B7_S275_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064004_CONS43P5B7_S276_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064005_AGOS44P4B7_S277_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064006_CONS45P2B7_S278_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064007_AGOS46P1B7_S279_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064008_CONS47P6B7_S280_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064009_AGOS48P4B7_S281_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064010_CONS49P6B7_S282_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064011_AGOS50P1B7_S283_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064012_CONS51P3B7_S284_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064013_CONS52P4B7_S285_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064014_AGOS53P1B7_S286_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064015_AGOS54P5B7_S287_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064016_CONS55P5B7_S288_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064017_AGOS56P1B7_S289_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064018_AGOS57P4B7_S290_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064019_AGOS58P6B7_S291_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064020_CONS59P1B7_S292_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064021_AGOS60P3B7_S293_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064022_CONS61P4B7_S294_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064023_CONS62P1B7_S295_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064024_CONS37P4A0_S296_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064025_AGOS38P1A0_S297_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064026_CONS39P1A0_S298_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064027_CONS41P1A0_S299_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064028_AGOS42P6A0_S300_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064029_CONS43P5A0_S301_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064030_AGOS44P4A0_S302_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064031_CONS45P2A0_S303_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064032_AGOS46P1A0_S304_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064033_CONS47P6A0_S305_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064034_AGOS48P4A0_S306_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064035_AlyxP1Mock_S307_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064036_AlyxP2Water_S308_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064037_CONS49P6A0_S309_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064038_CONS51P3A0_S310_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064039_CONS52P4A0_S311_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064040_CONS55P5A0_S312_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064041_AGOS56P1A0_S313_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064042_AGOS57P4A0_S314_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064043_AGOS58P6A0_S315_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064044_CONS59P1A0_S316_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064045_AGOS60P3A0_S317_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064046_CONS61P4A0_S318_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064047_CONS62P1A0_S319_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064048_CONS37P4A8_S320_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064049_AGOS38P1A8_S321_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064050_CONS39P1A8_S322_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064051_CONS41P1A8_S323_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064052_AGOS42P6A8_S324_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064053_CONS43P5A8_S325_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064054_AGOS44P4A8_S326_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064055_CONS45P2A8_S327_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064056_AGOS46P1A8_S328_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064057_CONS47P6A8_S329_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064058_AGOS48P4A8_S330_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064059_CONS49P6A8_S331_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064060_AGOS50P1A8_S332_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064061_CONS51P3A8_S333_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064062_CONS52P4A8_S334_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064063_AGOS53P1A8_S335_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064064_AGOS54P5A8_S336_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064065_CONS55P5A8_S337_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064066_AGOS56P1A8_S338_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064067_AGOS57P4A8_S339_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064068_AGOS58P6A8_S340_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064069_CONS59P1A8_S341_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064070_AGOS60P3A8_S342_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064071_CONS61P4A8_S343_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064072_CONS62P1A8_S344_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064073_CONS37P4A16_S345_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064074_AGOS38P1A16_S346_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064075_CONS39P1A16_S347_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064076_CONS41P1A16_S348_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064077_AGOS42P6A16_S349_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064078_CONS43P5A16_S350_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064079_AGOS44P4A16_S351_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064080_CONS45P2A16_S352_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064081_AGOS46P1A16_S353_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064082_CONS47P6A16_S354_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064083_AGOS48P4A16_S355_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064084_CONS49P6A16_S356_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064085_AGOS50P1A16_S357_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064086_CONS51P3A16_S358_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064087_CONS52P4A16_S359_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064088_AGOS53P1A16_S360_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064089_AGOS54P5A16_S361_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064090_CONS55P5A16_S362_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064091_AGOS56P1A16_S363_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064092_AGOS57P4A16_S364_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064093_AGOS58P6A16_S365_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064094_CONS59P1A16_S366_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064095_AGOS60P3A16_S367_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064096_CONS61P4A16_S368_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064097_CONS62P1A16_S369_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064098_AlyxP2Mock_S370_run976_L001_R1_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064099_AlyxP2Water_S371_run976_run976_L001_R1_001.fastq.gz
+bash-4.2$ ^C
+bash-4.2$ ls -1 "$PWD/"*R2*
+/scratch/bell/fiska/Agolin/fastq_files/063876_P5Mock_S148_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063877_P5Water_S149_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063972_P6Mock_S244_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063973_P6Water_S245_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063974_CONS37P4B14_S246_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063975_AGOS38P1B14_S247_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063976_CONS39P1B14_S248_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063977_CONS41P1B14_S249_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063978_AGOS42P6B14_S250_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063979_CONS43P5B14_S251_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063980_AGOS44P4B14_S252_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063981_CONS45P2B14_S253_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063982_AGOS46P1B14_S254_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063983_CONS47P6B14_S255_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063984_AGOS48P4B14_S256_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063985_CONS49P6B14_S257_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063986_AGOS50P1B14_S258_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063987_CONS51P3B14_S259_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063988_CONS52P4B14_S260_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063989_AGOS53P1B14_S261_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063990_AGOS54P5B14_S262_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063991_CONS55P5B14_S263_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063992_AGOS56P1B14_S264_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063993_AGOS57P4B14_S265_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063994_AGOS58P6B14_S266_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063995_CONS59P1B14_S267_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063996_AGOS60P3B14_S268_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063997_CONS61P4B14_S269_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063998_CONS62P1B14_S270_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/063999_CONS37P4B7_S271_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064000_AGOS38P1B7_S272_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064001_CONS39P1B7_S273_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064002_CONS41P1B7_S274_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064003_AGOS42P6B7_S275_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064004_CONS43P5B7_S276_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064005_AGOS44P4B7_S277_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064006_CONS45P2B7_S278_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064007_AGOS46P1B7_S279_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064008_CONS47P6B7_S280_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064009_AGOS48P4B7_S281_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064010_CONS49P6B7_S282_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064011_AGOS50P1B7_S283_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064012_CONS51P3B7_S284_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064013_CONS52P4B7_S285_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064014_AGOS53P1B7_S286_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064015_AGOS54P5B7_S287_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064016_CONS55P5B7_S288_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064017_AGOS56P1B7_S289_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064018_AGOS57P4B7_S290_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064019_AGOS58P6B7_S291_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064020_CONS59P1B7_S292_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064021_AGOS60P3B7_S293_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064022_CONS61P4B7_S294_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064023_CONS62P1B7_S295_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064024_CONS37P4A0_S296_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064025_AGOS38P1A0_S297_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064026_CONS39P1A0_S298_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064027_CONS41P1A0_S299_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064028_AGOS42P6A0_S300_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064029_CONS43P5A0_S301_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064030_AGOS44P4A0_S302_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064031_CONS45P2A0_S303_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064032_AGOS46P1A0_S304_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064033_CONS47P6A0_S305_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064034_AGOS48P4A0_S306_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064035_AlyxP1Mock_S307_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064036_AlyxP2Water_S308_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064037_CONS49P6A0_S309_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064038_CONS51P3A0_S310_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064039_CONS52P4A0_S311_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064040_CONS55P5A0_S312_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064041_AGOS56P1A0_S313_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064042_AGOS57P4A0_S314_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064043_AGOS58P6A0_S315_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064044_CONS59P1A0_S316_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064045_AGOS60P3A0_S317_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064046_CONS61P4A0_S318_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064047_CONS62P1A0_S319_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064048_CONS37P4A8_S320_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064049_AGOS38P1A8_S321_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064050_CONS39P1A8_S322_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064051_CONS41P1A8_S323_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064052_AGOS42P6A8_S324_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064053_CONS43P5A8_S325_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064054_AGOS44P4A8_S326_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064055_CONS45P2A8_S327_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064056_AGOS46P1A8_S328_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064057_CONS47P6A8_S329_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064058_AGOS48P4A8_S330_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064059_CONS49P6A8_S331_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064060_AGOS50P1A8_S332_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064061_CONS51P3A8_S333_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064062_CONS52P4A8_S334_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064063_AGOS53P1A8_S335_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064064_AGOS54P5A8_S336_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064065_CONS55P5A8_S337_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064066_AGOS56P1A8_S338_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064067_AGOS57P4A8_S339_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064068_AGOS58P6A8_S340_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064069_CONS59P1A8_S341_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064070_AGOS60P3A8_S342_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064071_CONS61P4A8_S343_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064072_CONS62P1A8_S344_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064073_CONS37P4A16_S345_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064074_AGOS38P1A16_S346_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064075_CONS39P1A16_S347_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064076_CONS41P1A16_S348_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064077_AGOS42P6A16_S349_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064078_CONS43P5A16_S350_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064079_AGOS44P4A16_S351_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064080_CONS45P2A16_S352_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064081_AGOS46P1A16_S353_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064082_CONS47P6A16_S354_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064083_AGOS48P4A16_S355_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064084_CONS49P6A16_S356_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064085_AGOS50P1A16_S357_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064086_CONS51P3A16_S358_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064087_CONS52P4A16_S359_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064088_AGOS53P1A16_S360_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064089_AGOS54P5A16_S361_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064090_CONS55P5A16_S362_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064091_AGOS56P1A16_S363_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064092_AGOS57P4A16_S364_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064093_AGOS58P6A16_S365_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064094_CONS59P1A16_S366_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064095_AGOS60P3A16_S367_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064096_CONS61P4A16_S368_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064097_CONS62P1A16_S369_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064098_AlyxP2Mock_S370_run976_L001_R2_001.fastq.gz
+/scratch/bell/fiska/Agolin/fastq_files/064099_AlyxP2Water_S371_run976_run976_L001_R2_001.fastq.gz
+bash-4.2$ ^C
+bash-4.2$ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' --input-path Agolin/agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+Usage: qiime tools import [OPTIONS]
+
+  Import data to create a new QIIME 2 Artifact. See https://docs.qiime2.org/
+  for usage examples and details on the file types and associated semantic
+  types that can be imported.
+
+Options:
+  --type TEXT             The semantic type of the artifact that will be
+                          created upon importing. Use --show-importable-types
+                          to see what importable semantic types are available
+                          in the current deployment.                [required]
+  --input-path PATH       Path to file or directory that should be imported.
+                                                                    [required]
+  --output-path ARTIFACT  Path where output artifact should be written.
+                                                                    [required]
+  --input-format TEXT     The format of the data to be imported. If not
+                          provided, data must be in the format expected by the
+                          semantic type provided via --type.
+  --show-importable-types Show the semantic types that can be supplied to
+                          --type to import data into an artifact.
+  --show-importable-formats
+                          Show formats that can be supplied to --input-format
+                          to import data into an artifact.
+  --help                  Show this message and exit.
+
+                    There was a problem with the command:
+ (1/1) Invalid value for '--input-path': Path 'Agolin/agolin_manifest.txt'
+  does not exist.
+bash-4.2$ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' --input-path agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza   Usage: qiime tools import [OPTIONS]
+
+  Import data to create a new QIIME 2 Artifact. See https://docs.qiime2.org/
+  for usage examples and details on the file types and associated semantic
+  types that can be imported.
+
+Options:
+  --type TEXT             The semantic type of the artifact that will be
+                          created upon importing. Use --show-importable-types
+                          to see what importable semantic types are available
+                          in the current deployment.                [required]
+  --input-path PATH       Path to file or directory that should be imported.
+                                                                    [required]
+  --output-path ARTIFACT  Path where output artifact should be written.
+                                                                    [required]
+  --input-format TEXT     The format of the data to be imported. If not
+                          provided, data must be in the format expected by the
+                          semantic type provided via --type.
+  --show-importable-types Show the semantic types that can be supplied to
+                          --type to import data into an artifact.
+  --show-importable-formats
+                          Show formats that can be supplied to --input-format
+                          to import data into an artifact.
+  --help                  Show this message and exit.
+
+                    There was a problem with the command:
+ (1/1) Invalid value for '--input-path': Path 'agolin_manifest.txt' does not
+  exist.
+bash-4.2$ ls
+063876_P5Mock_S148_run976_L001_R1_001.fastq.gz
+063876_P5Mock_S148_run976_L001_R2_001.fastq.gz
+063877_P5Water_S149_run976_L001_R1_001.fastq.gz
+063877_P5Water_S149_run976_L001_R2_001.fastq.gz
+063972_P6Mock_S244_run976_L001_R1_001.fastq.gz
+063972_P6Mock_S244_run976_L001_R2_001.fastq.gz
+063973_P6Water_S245_run976_L001_R1_001.fastq.gz
+063973_P6Water_S245_run976_L001_R2_001.fastq.gz
+063974_CONS37P4B14_S246_run976_L001_R1_001.fastq.gz
+063974_CONS37P4B14_S246_run976_L001_R2_001.fastq.gz
+063975_AGOS38P1B14_S247_run976_L001_R1_001.fastq.gz
+063975_AGOS38P1B14_S247_run976_L001_R2_001.fastq.gz
+063976_CONS39P1B14_S248_run976_L001_R1_001.fastq.gz
+063976_CONS39P1B14_S248_run976_L001_R2_001.fastq.gz
+063977_CONS41P1B14_S249_run976_L001_R1_001.fastq.gz
+063977_CONS41P1B14_S249_run976_L001_R2_001.fastq.gz
+063978_AGOS42P6B14_S250_run976_L001_R1_001.fastq.gz
+063978_AGOS42P6B14_S250_run976_L001_R2_001.fastq.gz
+063979_CONS43P5B14_S251_run976_L001_R1_001.fastq.gz
+063979_CONS43P5B14_S251_run976_L001_R2_001.fastq.gz
+063980_AGOS44P4B14_S252_run976_L001_R1_001.fastq.gz
+063980_AGOS44P4B14_S252_run976_L001_R2_001.fastq.gz
+063981_CONS45P2B14_S253_run976_L001_R1_001.fastq.gz
+063981_CONS45P2B14_S253_run976_L001_R2_001.fastq.gz
+063982_AGOS46P1B14_S254_run976_L001_R1_001.fastq.gz
+063982_AGOS46P1B14_S254_run976_L001_R2_001.fastq.gz
+063983_CONS47P6B14_S255_run976_L001_R1_001.fastq.gz
+063983_CONS47P6B14_S255_run976_L001_R2_001.fastq.gz
+063984_AGOS48P4B14_S256_run976_L001_R1_001.fastq.gz
+063984_AGOS48P4B14_S256_run976_L001_R2_001.fastq.gz
+063985_CONS49P6B14_S257_run976_L001_R1_001.fastq.gz
+063985_CONS49P6B14_S257_run976_L001_R2_001.fastq.gz
+063986_AGOS50P1B14_S258_run976_L001_R1_001.fastq.gz
+063986_AGOS50P1B14_S258_run976_L001_R2_001.fastq.gz
+063987_CONS51P3B14_S259_run976_L001_R1_001.fastq.gz
+063987_CONS51P3B14_S259_run976_L001_R2_001.fastq.gz
+063988_CONS52P4B14_S260_run976_L001_R1_001.fastq.gz
+063988_CONS52P4B14_S260_run976_L001_R2_001.fastq.gz
+063989_AGOS53P1B14_S261_run976_L001_R1_001.fastq.gz
+063989_AGOS53P1B14_S261_run976_L001_R2_001.fastq.gz
+063990_AGOS54P5B14_S262_run976_L001_R1_001.fastq.gz
+063990_AGOS54P5B14_S262_run976_L001_R2_001.fastq.gz
+063991_CONS55P5B14_S263_run976_L001_R1_001.fastq.gz
+063991_CONS55P5B14_S263_run976_L001_R2_001.fastq.gz
+063992_AGOS56P1B14_S264_run976_L001_R1_001.fastq.gz
+063992_AGOS56P1B14_S264_run976_L001_R2_001.fastq.gz
+063993_AGOS57P4B14_S265_run976_L001_R1_001.fastq.gz
+063993_AGOS57P4B14_S265_run976_L001_R2_001.fastq.gz
+063994_AGOS58P6B14_S266_run976_L001_R1_001.fastq.gz
+063994_AGOS58P6B14_S266_run976_L001_R2_001.fastq.gz
+063995_CONS59P1B14_S267_run976_L001_R1_001.fastq.gz
+063995_CONS59P1B14_S267_run976_L001_R2_001.fastq.gz
+063996_AGOS60P3B14_S268_run976_L001_R1_001.fastq.gz
+063996_AGOS60P3B14_S268_run976_L001_R2_001.fastq.gz
+063997_CONS61P4B14_S269_run976_L001_R1_001.fastq.gz
+063997_CONS61P4B14_S269_run976_L001_R2_001.fastq.gz
+063998_CONS62P1B14_S270_run976_L001_R1_001.fastq.gz
+063998_CONS62P1B14_S270_run976_L001_R2_001.fastq.gz
+063999_CONS37P4B7_S271_run976_L001_R1_001.fastq.gz
+063999_CONS37P4B7_S271_run976_L001_R2_001.fastq.gz
+064000_AGOS38P1B7_S272_run976_L001_R1_001.fastq.gz
+064000_AGOS38P1B7_S272_run976_L001_R2_001.fastq.gz
+064001_CONS39P1B7_S273_run976_L001_R1_001.fastq.gz
+064001_CONS39P1B7_S273_run976_L001_R2_001.fastq.gz
+064002_CONS41P1B7_S274_run976_L001_R1_001.fastq.gz
+064002_CONS41P1B7_S274_run976_L001_R2_001.fastq.gz
+064003_AGOS42P6B7_S275_run976_L001_R1_001.fastq.gz
+064003_AGOS42P6B7_S275_run976_L001_R2_001.fastq.gz
+064004_CONS43P5B7_S276_run976_L001_R1_001.fastq.gz
+064004_CONS43P5B7_S276_run976_L001_R2_001.fastq.gz
+064005_AGOS44P4B7_S277_run976_L001_R1_001.fastq.gz
+064005_AGOS44P4B7_S277_run976_L001_R2_001.fastq.gz
+064006_CONS45P2B7_S278_run976_L001_R1_001.fastq.gz
+064006_CONS45P2B7_S278_run976_L001_R2_001.fastq.gz
+064007_AGOS46P1B7_S279_run976_L001_R1_001.fastq.gz
+064007_AGOS46P1B7_S279_run976_L001_R2_001.fastq.gz
+064008_CONS47P6B7_S280_run976_L001_R1_001.fastq.gz
+064008_CONS47P6B7_S280_run976_L001_R2_001.fastq.gz
+064009_AGOS48P4B7_S281_run976_L001_R1_001.fastq.gz
+064009_AGOS48P4B7_S281_run976_L001_R2_001.fastq.gz
+064010_CONS49P6B7_S282_run976_L001_R1_001.fastq.gz
+064010_CONS49P6B7_S282_run976_L001_R2_001.fastq.gz
+064011_AGOS50P1B7_S283_run976_L001_R1_001.fastq.gz
+064011_AGOS50P1B7_S283_run976_L001_R2_001.fastq.gz
+064012_CONS51P3B7_S284_run976_L001_R1_001.fastq.gz
+064012_CONS51P3B7_S284_run976_L001_R2_001.fastq.gz
+064013_CONS52P4B7_S285_run976_L001_R1_001.fastq.gz
+064013_CONS52P4B7_S285_run976_L001_R2_001.fastq.gz
+064014_AGOS53P1B7_S286_run976_L001_R1_001.fastq.gz
+064014_AGOS53P1B7_S286_run976_L001_R2_001.fastq.gz
+064015_AGOS54P5B7_S287_run976_L001_R1_001.fastq.gz
+064015_AGOS54P5B7_S287_run976_L001_R2_001.fastq.gz
+064016_CONS55P5B7_S288_run976_L001_R1_001.fastq.gz
+064016_CONS55P5B7_S288_run976_L001_R2_001.fastq.gz
+064017_AGOS56P1B7_S289_run976_L001_R1_001.fastq.gz
+064017_AGOS56P1B7_S289_run976_L001_R2_001.fastq.gz
+064018_AGOS57P4B7_S290_run976_L001_R1_001.fastq.gz
+064018_AGOS57P4B7_S290_run976_L001_R2_001.fastq.gz
+064019_AGOS58P6B7_S291_run976_L001_R1_001.fastq.gz
+064019_AGOS58P6B7_S291_run976_L001_R2_001.fastq.gz
+064020_CONS59P1B7_S292_run976_L001_R1_001.fastq.gz
+064020_CONS59P1B7_S292_run976_L001_R2_001.fastq.gz
+064021_AGOS60P3B7_S293_run976_L001_R1_001.fastq.gz
+064021_AGOS60P3B7_S293_run976_L001_R2_001.fastq.gz
+064022_CONS61P4B7_S294_run976_L001_R1_001.fastq.gz
+064022_CONS61P4B7_S294_run976_L001_R2_001.fastq.gz
+064023_CONS62P1B7_S295_run976_L001_R1_001.fastq.gz
+064023_CONS62P1B7_S295_run976_L001_R2_001.fastq.gz
+064024_CONS37P4A0_S296_run976_L001_R1_001.fastq.gz
+064024_CONS37P4A0_S296_run976_L001_R2_001.fastq.gz
+064025_AGOS38P1A0_S297_run976_L001_R1_001.fastq.gz
+064025_AGOS38P1A0_S297_run976_L001_R2_001.fastq.gz
+064026_CONS39P1A0_S298_run976_L001_R1_001.fastq.gz
+064026_CONS39P1A0_S298_run976_L001_R2_001.fastq.gz
+064027_CONS41P1A0_S299_run976_L001_R1_001.fastq.gz
+064027_CONS41P1A0_S299_run976_L001_R2_001.fastq.gz
+064028_AGOS42P6A0_S300_run976_L001_R1_001.fastq.gz
+064028_AGOS42P6A0_S300_run976_L001_R2_001.fastq.gz
+064029_CONS43P5A0_S301_run976_L001_R1_001.fastq.gz
+064029_CONS43P5A0_S301_run976_L001_R2_001.fastq.gz
+064030_AGOS44P4A0_S302_run976_L001_R1_001.fastq.gz
+064030_AGOS44P4A0_S302_run976_L001_R2_001.fastq.gz
+064031_CONS45P2A0_S303_run976_L001_R1_001.fastq.gz
+064031_CONS45P2A0_S303_run976_L001_R2_001.fastq.gz
+064032_AGOS46P1A0_S304_run976_L001_R1_001.fastq.gz
+064032_AGOS46P1A0_S304_run976_L001_R2_001.fastq.gz
+064033_CONS47P6A0_S305_run976_L001_R1_001.fastq.gz
+064033_CONS47P6A0_S305_run976_L001_R2_001.fastq.gz
+064034_AGOS48P4A0_S306_run976_L001_R1_001.fastq.gz
+064034_AGOS48P4A0_S306_run976_L001_R2_001.fastq.gz
+064035_AlyxP1Mock_S307_run976_L001_R1_001.fastq.gz
+064035_AlyxP1Mock_S307_run976_L001_R2_001.fastq.gz
+064036_AlyxP2Water_S308_run976_L001_R1_001.fastq.gz
+064036_AlyxP2Water_S308_run976_L001_R2_001.fastq.gz
+064037_CONS49P6A0_S309_run976_L001_R1_001.fastq.gz
+064037_CONS49P6A0_S309_run976_L001_R2_001.fastq.gz
+064038_CONS51P3A0_S310_run976_L001_R1_001.fastq.gz
+064038_CONS51P3A0_S310_run976_L001_R2_001.fastq.gz
+064039_CONS52P4A0_S311_run976_L001_R1_001.fastq.gz
+064039_CONS52P4A0_S311_run976_L001_R2_001.fastq.gz
+064040_CONS55P5A0_S312_run976_L001_R1_001.fastq.gz
+064040_CONS55P5A0_S312_run976_L001_R2_001.fastq.gz
+064041_AGOS56P1A0_S313_run976_L001_R1_001.fastq.gz
+064041_AGOS56P1A0_S313_run976_L001_R2_001.fastq.gz
+064042_AGOS57P4A0_S314_run976_L001_R1_001.fastq.gz
+064042_AGOS57P4A0_S314_run976_L001_R2_001.fastq.gz
+064043_AGOS58P6A0_S315_run976_L001_R1_001.fastq.gz
+064043_AGOS58P6A0_S315_run976_L001_R2_001.fastq.gz
+064044_CONS59P1A0_S316_run976_L001_R1_001.fastq.gz
+064044_CONS59P1A0_S316_run976_L001_R2_001.fastq.gz
+064045_AGOS60P3A0_S317_run976_L001_R1_001.fastq.gz
+064045_AGOS60P3A0_S317_run976_L001_R2_001.fastq.gz
+064046_CONS61P4A0_S318_run976_L001_R1_001.fastq.gz
+064046_CONS61P4A0_S318_run976_L001_R2_001.fastq.gz
+064047_CONS62P1A0_S319_run976_L001_R1_001.fastq.gz
+064047_CONS62P1A0_S319_run976_L001_R2_001.fastq.gz
+064048_CONS37P4A8_S320_run976_L001_R1_001.fastq.gz
+064048_CONS37P4A8_S320_run976_L001_R2_001.fastq.gz
+064049_AGOS38P1A8_S321_run976_L001_R1_001.fastq.gz
+064049_AGOS38P1A8_S321_run976_L001_R2_001.fastq.gz
+064050_CONS39P1A8_S322_run976_L001_R1_001.fastq.gz
+064050_CONS39P1A8_S322_run976_L001_R2_001.fastq.gz
+064051_CONS41P1A8_S323_run976_L001_R1_001.fastq.gz
+064051_CONS41P1A8_S323_run976_L001_R2_001.fastq.gz
+064052_AGOS42P6A8_S324_run976_L001_R1_001.fastq.gz
+064052_AGOS42P6A8_S324_run976_L001_R2_001.fastq.gz
+064053_CONS43P5A8_S325_run976_L001_R1_001.fastq.gz
+064053_CONS43P5A8_S325_run976_L001_R2_001.fastq.gz
+064054_AGOS44P4A8_S326_run976_L001_R1_001.fastq.gz
+064054_AGOS44P4A8_S326_run976_L001_R2_001.fastq.gz
+064055_CONS45P2A8_S327_run976_L001_R1_001.fastq.gz
+064055_CONS45P2A8_S327_run976_L001_R2_001.fastq.gz
+064056_AGOS46P1A8_S328_run976_L001_R1_001.fastq.gz
+064056_AGOS46P1A8_S328_run976_L001_R2_001.fastq.gz
+064057_CONS47P6A8_S329_run976_L001_R1_001.fastq.gz
+064057_CONS47P6A8_S329_run976_L001_R2_001.fastq.gz
+064058_AGOS48P4A8_S330_run976_L001_R1_001.fastq.gz
+064058_AGOS48P4A8_S330_run976_L001_R2_001.fastq.gz
+064059_CONS49P6A8_S331_run976_L001_R1_001.fastq.gz
+064059_CONS49P6A8_S331_run976_L001_R2_001.fastq.gz
+064060_AGOS50P1A8_S332_run976_L001_R1_001.fastq.gz
+064060_AGOS50P1A8_S332_run976_L001_R2_001.fastq.gz
+064061_CONS51P3A8_S333_run976_L001_R1_001.fastq.gz
+064061_CONS51P3A8_S333_run976_L001_R2_001.fastq.gz
+064062_CONS52P4A8_S334_run976_L001_R1_001.fastq.gz
+064062_CONS52P4A8_S334_run976_L001_R2_001.fastq.gz
+064063_AGOS53P1A8_S335_run976_L001_R1_001.fastq.gz
+064063_AGOS53P1A8_S335_run976_L001_R2_001.fastq.gz
+064064_AGOS54P5A8_S336_run976_L001_R1_001.fastq.gz
+064064_AGOS54P5A8_S336_run976_L001_R2_001.fastq.gz
+064065_CONS55P5A8_S337_run976_L001_R1_001.fastq.gz
+064065_CONS55P5A8_S337_run976_L001_R2_001.fastq.gz
+064066_AGOS56P1A8_S338_run976_L001_R1_001.fastq.gz
+064066_AGOS56P1A8_S338_run976_L001_R2_001.fastq.gz
+064067_AGOS57P4A8_S339_run976_L001_R1_001.fastq.gz
+064067_AGOS57P4A8_S339_run976_L001_R2_001.fastq.gz
+064068_AGOS58P6A8_S340_run976_L001_R1_001.fastq.gz
+064068_AGOS58P6A8_S340_run976_L001_R2_001.fastq.gz
+064069_CONS59P1A8_S341_run976_L001_R1_001.fastq.gz
+064069_CONS59P1A8_S341_run976_L001_R2_001.fastq.gz
+064070_AGOS60P3A8_S342_run976_L001_R1_001.fastq.gz
+064070_AGOS60P3A8_S342_run976_L001_R2_001.fastq.gz
+064071_CONS61P4A8_S343_run976_L001_R1_001.fastq.gz
+064071_CONS61P4A8_S343_run976_L001_R2_001.fastq.gz
+064072_CONS62P1A8_S344_run976_L001_R1_001.fastq.gz
+064072_CONS62P1A8_S344_run976_L001_R2_001.fastq.gz
+064073_CONS37P4A16_S345_run976_L001_R1_001.fastq.gz
+064073_CONS37P4A16_S345_run976_L001_R2_001.fastq.gz
+064074_AGOS38P1A16_S346_run976_L001_R1_001.fastq.gz
+064074_AGOS38P1A16_S346_run976_L001_R2_001.fastq.gz
+064075_CONS39P1A16_S347_run976_L001_R1_001.fastq.gz
+064075_CONS39P1A16_S347_run976_L001_R2_001.fastq.gz
+064076_CONS41P1A16_S348_run976_L001_R1_001.fastq.gz
+064076_CONS41P1A16_S348_run976_L001_R2_001.fastq.gz
+064077_AGOS42P6A16_S349_run976_L001_R1_001.fastq.gz
+064077_AGOS42P6A16_S349_run976_L001_R2_001.fastq.gz
+064078_CONS43P5A16_S350_run976_L001_R1_001.fastq.gz
+064078_CONS43P5A16_S350_run976_L001_R2_001.fastq.gz
+064079_AGOS44P4A16_S351_run976_L001_R1_001.fastq.gz
+064079_AGOS44P4A16_S351_run976_L001_R2_001.fastq.gz
+064080_CONS45P2A16_S352_run976_L001_R1_001.fastq.gz
+064080_CONS45P2A16_S352_run976_L001_R2_001.fastq.gz
+064081_AGOS46P1A16_S353_run976_L001_R1_001.fastq.gz
+064081_AGOS46P1A16_S353_run976_L001_R2_001.fastq.gz
+064082_CONS47P6A16_S354_run976_L001_R1_001.fastq.gz
+064082_CONS47P6A16_S354_run976_L001_R2_001.fastq.gz
+064083_AGOS48P4A16_S355_run976_L001_R1_001.fastq.gz
+064083_AGOS48P4A16_S355_run976_L001_R2_001.fastq.gz
+064084_CONS49P6A16_S356_run976_L001_R1_001.fastq.gz
+064084_CONS49P6A16_S356_run976_L001_R2_001.fastq.gz
+064085_AGOS50P1A16_S357_run976_L001_R1_001.fastq.gz
+064085_AGOS50P1A16_S357_run976_L001_R2_001.fastq.gz
+064086_CONS51P3A16_S358_run976_L001_R1_001.fastq.gz
+064086_CONS51P3A16_S358_run976_L001_R2_001.fastq.gz
+064087_CONS52P4A16_S359_run976_L001_R1_001.fastq.gz
+064087_CONS52P4A16_S359_run976_L001_R2_001.fastq.gz
+064088_AGOS53P1A16_S360_run976_L001_R1_001.fastq.gz
+064088_AGOS53P1A16_S360_run976_L001_R2_001.fastq.gz
+064089_AGOS54P5A16_S361_run976_L001_R1_001.fastq.gz
+064089_AGOS54P5A16_S361_run976_L001_R2_001.fastq.gz
+064090_CONS55P5A16_S362_run976_L001_R1_001.fastq.gz
+064090_CONS55P5A16_S362_run976_L001_R2_001.fastq.gz
+064091_AGOS56P1A16_S363_run976_L001_R1_001.fastq.gz
+064091_AGOS56P1A16_S363_run976_L001_R2_001.fastq.gz
+064092_AGOS57P4A16_S364_run976_L001_R1_001.fastq.gz
+064092_AGOS57P4A16_S364_run976_L001_R2_001.fastq.gz
+064093_AGOS58P6A16_S365_run976_L001_R1_001.fastq.gz
+064093_AGOS58P6A16_S365_run976_L001_R2_001.fastq.gz
+064094_CONS59P1A16_S366_run976_L001_R1_001.fastq.gz
+064094_CONS59P1A16_S366_run976_L001_R2_001.fastq.gz
+064095_AGOS60P3A16_S367_run976_L001_R1_001.fastq.gz
+064095_AGOS60P3A16_S367_run976_L001_R2_001.fastq.gz
+064096_CONS61P4A16_S368_run976_L001_R1_001.fastq.gz
+064096_CONS61P4A16_S368_run976_L001_R2_001.fastq.gz
+064097_CONS62P1A16_S369_run976_L001_R1_001.fastq.gz
+064097_CONS62P1A16_S369_run976_L001_R2_001.fastq.gz
+064098_AlyxP2Mock_S370_run976_L001_R1_001.fastq.gz
+064098_AlyxP2Mock_S370_run976_L001_R2_001.fastq.gz
+064099_AlyxP2Water_S371_run976_run976_L001_R1_001.fastq.gz
+064099_AlyxP2Water_S371_run976_run976_L001_R2_001.fastq.gz
+bash-4.2$ cd ..
+bash-4.2$ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' --input-path agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+There was a problem importing agolin_manifest.txt:
+
+  agolin_manifest.txt is not a(n) PairedEndFastqManifestPhred33V2 file:
+
+  Filepath on line 1 and column "forward-absolute-filepath" could not be found (/scratch/bell/fiska/Agolin/063974_CONS37P4B14_S246_run976_L001_R1_001.fastq.gz) for sample "CONS37P4B14".
+
+bash-4.2$ qiime tools import --type 'SampleData[SingleEndSequencesWithQuality]' --input-path agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+Traceback (most recent call last):
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/q2cli/builtin/tools.py", line 157, in import_data
+    artifact = qiime2.sdk.Artifact.import_data(type, input_path,
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/qiime2/sdk/result.py", line 299, in import_data
+    return cls._from_view(type_, view, view_type, provenance_capture,
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/qiime2/sdk/result.py", line 315, in _from_view
+    output_dir_fmt = pm.get_directory_format(type)
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/qiime2/sdk/plugin_manager.py", line 354, in get_directory_format
+    raise TypeError(
+TypeError: Semantic type SampleData[SingleEndSequencesWithQuality] does not have a compatible directory format.
+
+An unexpected error has occurred:
+
+  Semantic type SampleData[SingleEndSequencesWithQuality] does not have a compatible directory format.
+
+See above for debug info.
+bash-4.2$ qiime tools import --type 'SampleData[SingleEndSequencesWithQuality]' --input-path agolin_manifest.txt --input-format SingleEndFastqManifestPhred33V2 --output-path demux.qza
+Traceback (most recent call last):
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/q2cli/builtin/tools.py", line 157, in import_data
+    artifact = qiime2.sdk.Artifact.import_data(type, input_path,
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/qiime2/sdk/result.py", line 299, in import_data
+    return cls._from_view(type_, view, view_type, provenance_capture,
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/qiime2/sdk/result.py", line 315, in _from_view
+    output_dir_fmt = pm.get_directory_format(type)
+  File "/group/bioinfo/apps/apps/miniconda-4.10/envs/qiime2-2022.8/lib/python3.8/site-packages/qiime2/sdk/plugin_manager.py", line 354, in get_directory_format
+    raise TypeError(
+TypeError: Semantic type SampleData[SingleEndSequencesWithQuality] does not have a compatible directory format.
+
+An unexpected error has occurred:
+
+  Semantic type SampleData[SingleEndSequencesWithQuality] does not have a compatible directory format.
+
+See above for debug info.
+bash-4.2$ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' --input-path agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+There was a problem importing agolin_manifest.txt:
+
+  agolin_manifest.txt is not a(n) PairedEndFastqManifestPhred33V2 file:
+
+  Filepath on line 1 and column "forward-absolute-filepath" could not be found (/scratch/bell/fiska/Agolin/063974_CONS37P4B14_S246_run976_L001_R1_001.fastq.gz) for sample "CONS37P4B14".
+
+bash-4.2$ cat agolin_manifest.txt
+sample-id       forward-absolute-filepath       reverse-absolute-filepath
+CONS37P4B14     /scratch/bell/fiska/Agolin/063974_CONS37P4B14_S246_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063974_CONS37P4B14_S246_run976_L001_R2_001.fastq.gz
+AGOS38P1B14     /scratch/bell/fiska/Agolin/063975_AGOS38P1B14_S247_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063975_AGOS38P1B14_S247_run976_L001_R2_001.fastq.gz
+CONS39P1B14     /scratch/bell/fiska/Agolin/063976_CONS39P1B14_S248_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063976_CONS39P1B14_S248_run976_L001_R2_001.fastq.gz
+CONS41P1B14     /scratch/bell/fiska/Agolin/063977_CONS41P1B14_S249_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063977_CONS41P1B14_S249_run976_L001_R2_001.fastq.gz
+AGOS42P6B14     /scratch/bell/fiska/Agolin/063978_AGOS42P6B14_S250_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063978_AGOS42P6B14_S250_run976_L001_R2_001.fastq.gz
+CONS43P5B14     /scratch/bell/fiska/Agolin/063979_CONS43P5B14_S251_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063979_CONS43P5B14_S251_run976_L001_R2_001.fastq.gz
+AGOS44P4B14     /scratch/bell/fiska/Agolin/063980_AGOS44P4B14_S252_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063980_AGOS44P4B14_S252_run976_L001_R2_001.fastq.gz
+CONS45P2B14     /scratch/bell/fiska/Agolin/063981_CONS45P2B14_S253_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063981_CONS45P2B14_S253_run976_L001_R2_001.fastq.gz
+AGOS46P1B14     /scratch/bell/fiska/Agolin/063982_AGOS46P1B14_S254_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063982_AGOS46P1B14_S254_run976_L001_R2_001.fastq.gz
+CONS47P6B14     /scratch/bell/fiska/Agolin/063983_CONS47P6B14_S255_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063983_CONS47P6B14_S255_run976_L001_R2_001.fastq.gz
+AGOS48P4B14     /scratch/bell/fiska/Agolin/063984_AGOS48P4B14_S256_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063984_AGOS48P4B14_S256_run976_L001_R2_001.fastq.gz
+CONS49P6B14     /scratch/bell/fiska/Agolin/063985_CONS49P6B14_S257_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063985_CONS49P6B14_S257_run976_L001_R2_001.fastq.gz
+AGOS50P1B14     /scratch/bell/fiska/Agolin/063986_AGOS50P1B14_S258_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063986_AGOS50P1B14_S258_run976_L001_R2_001.fastq.gz
+CONS51P3B14     /scratch/bell/fiska/Agolin/063987_CONS51P3B14_S259_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063987_CONS51P3B14_S259_run976_L001_R2_001.fastq.gz
+CONS52P4B14     /scratch/bell/fiska/Agolin/063988_CONS52P4B14_S260_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063988_CONS52P4B14_S260_run976_L001_R2_001.fastq.gz
+AGOS53P1B14     /scratch/bell/fiska/Agolin/063989_AGOS53P1B14_S261_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063989_AGOS53P1B14_S261_run976_L001_R2_001.fastq.gz
+AGOS54P5B14     /scratch/bell/fiska/Agolin/063990_AGOS54P5B14_S262_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063990_AGOS54P5B14_S262_run976_L001_R2_001.fastq.gz
+CONS55P5B14     /scratch/bell/fiska/Agolin/063991_CONS55P5B14_S263_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063991_CONS55P5B14_S263_run976_L001_R2_001.fastq.gz
+AGOS56P1B14     /scratch/bell/fiska/Agolin/063992_AGOS56P1B14_S264_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063992_AGOS56P1B14_S264_run976_L001_R2_001.fastq.gz
+AGOS57P4B14     /scratch/bell/fiska/Agolin/063993_AGOS57P4B14_S265_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063993_AGOS57P4B14_S265_run976_L001_R2_001.fastq.gz
+AGOS58P6B14     /scratch/bell/fiska/Agolin/063994_AGOS58P6B14_S266_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063994_AGOS58P6B14_S266_run976_L001_R2_001.fastq.gz
+CONS59P1B14     /scratch/bell/fiska/Agolin/063995_CONS59P1B14_S267_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063995_CONS59P1B14_S267_run976_L001_R2_001.fastq.gz
+AGOS60P3B14     /scratch/bell/fiska/Agolin/063996_AGOS60P3B14_S268_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063996_AGOS60P3B14_S268_run976_L001_R2_001.fastq.gz
+CONS61P4B14     /scratch/bell/fiska/Agolin/063997_CONS61P4B14_S269_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063997_CONS61P4B14_S269_run976_L001_R2_001.fastq.gz
+CONS62P1B14     /scratch/bell/fiska/Agolin/063998_CONS62P1B14_S270_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/063998_CONS62P1B14_S270_run976_L001_R2_001.fastq.gz
+CONS37P4B7      /scratch/bell/fiska/Agolin/063999_CONS37P4B7_S271_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/063999_CONS37P4B7_S271_run976_L001_R2_001.fastq.gz
+AGOS38P1B7      /scratch/bell/fiska/Agolin/064000_AGOS38P1B7_S272_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064000_AGOS38P1B7_S272_run976_L001_R2_001.fastq.gz
+CONS39P1B7      /scratch/bell/fiska/Agolin/064001_CONS39P1B7_S273_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064001_CONS39P1B7_S273_run976_L001_R2_001.fastq.gz
+CONS41P1B7      /scratch/bell/fiska/Agolin/064002_CONS41P1B7_S274_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064002_CONS41P1B7_S274_run976_L001_R2_001.fastq.gz
+AGOS42P6B7      /scratch/bell/fiska/Agolin/064003_AGOS42P6B7_S275_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064003_AGOS42P6B7_S275_run976_L001_R2_001.fastq.gz
+CONS43P5B7      /scratch/bell/fiska/Agolin/064004_CONS43P5B7_S276_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064004_CONS43P5B7_S276_run976_L001_R2_001.fastq.gz
+AGOS44P4B7      /scratch/bell/fiska/Agolin/064005_AGOS44P4B7_S277_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064005_AGOS44P4B7_S277_run976_L001_R2_001.fastq.gz
+CONS45P2B7      /scratch/bell/fiska/Agolin/064006_CONS45P2B7_S278_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064006_CONS45P2B7_S278_run976_L001_R2_001.fastq.gz
+AGOS46P1B7      /scratch/bell/fiska/Agolin/064007_AGOS46P1B7_S279_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064007_AGOS46P1B7_S279_run976_L001_R2_001.fastq.gz
+CONS47P6B7      /scratch/bell/fiska/Agolin/064008_CONS47P6B7_S280_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064008_CONS47P6B7_S280_run976_L001_R2_001.fastq.gz
+AGOS48P4B7      /scratch/bell/fiska/Agolin/064009_AGOS48P4B7_S281_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064009_AGOS48P4B7_S281_run976_L001_R2_001.fastq.gz
+CONS49P6B7      /scratch/bell/fiska/Agolin/064010_CONS49P6B7_S282_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064010_CONS49P6B7_S282_run976_L001_R2_001.fastq.gz
+AGOS50P1B7      /scratch/bell/fiska/Agolin/064011_AGOS50P1B7_S283_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064011_AGOS50P1B7_S283_run976_L001_R2_001.fastq.gz
+CONS51P3B7      /scratch/bell/fiska/Agolin/064012_CONS51P3B7_S284_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064012_CONS51P3B7_S284_run976_L001_R2_001.fastq.gz
+CONS52P4B7      /scratch/bell/fiska/Agolin/064013_CONS52P4B7_S285_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064013_CONS52P4B7_S285_run976_L001_R2_001.fastq.gz
+AGOS53P1B7      /scratch/bell/fiska/Agolin/064014_AGOS53P1B7_S286_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064014_AGOS53P1B7_S286_run976_L001_R2_001.fastq.gz
+AGOS54P5B7      /scratch/bell/fiska/Agolin/064015_AGOS54P5B7_S287_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064015_AGOS54P5B7_S287_run976_L001_R2_001.fastq.gz
+CONS55P5B7      /scratch/bell/fiska/Agolin/064016_CONS55P5B7_S288_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064016_CONS55P5B7_S288_run976_L001_R2_001.fastq.gz
+AGOS56P1B7      /scratch/bell/fiska/Agolin/064017_AGOS56P1B7_S289_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064017_AGOS56P1B7_S289_run976_L001_R2_001.fastq.gz
+AGOS57P4B7      /scratch/bell/fiska/Agolin/064018_AGOS57P4B7_S290_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064018_AGOS57P4B7_S290_run976_L001_R2_001.fastq.gz
+AGOS58P6B7      /scratch/bell/fiska/Agolin/064019_AGOS58P6B7_S291_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064019_AGOS58P6B7_S291_run976_L001_R2_001.fastq.gz
+CONS59P1B7      /scratch/bell/fiska/Agolin/064020_CONS59P1B7_S292_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064020_CONS59P1B7_S292_run976_L001_R2_001.fastq.gz
+AGOS60P3B7      /scratch/bell/fiska/Agolin/064021_AGOS60P3B7_S293_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064021_AGOS60P3B7_S293_run976_L001_R2_001.fastq.gz
+CONS61P4B7      /scratch/bell/fiska/Agolin/064022_CONS61P4B7_S294_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064022_CONS61P4B7_S294_run976_L001_R2_001.fastq.gz
+CONS62P1B7      /scratch/bell/fiska/Agolin/064023_CONS62P1B7_S295_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064023_CONS62P1B7_S295_run976_L001_R2_001.fastq.gz
+CONS37P4A0      /scratch/bell/fiska/Agolin/064024_CONS37P4A0_S296_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064024_CONS37P4A0_S296_run976_L001_R2_001.fastq.gz
+AGOS38P1A0      /scratch/bell/fiska/Agolin/064025_AGOS38P1A0_S297_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064025_AGOS38P1A0_S297_run976_L001_R2_001.fastq.gz
+CONS39P1A0      /scratch/bell/fiska/Agolin/064026_CONS39P1A0_S298_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064026_CONS39P1A0_S298_run976_L001_R2_001.fastq.gz
+CONS41P1A0      /scratch/bell/fiska/Agolin/064027_CONS41P1A0_S299_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064027_CONS41P1A0_S299_run976_L001_R2_001.fastq.gz
+AGOS42P6A0      /scratch/bell/fiska/Agolin/064028_AGOS42P6A0_S300_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064028_AGOS42P6A0_S300_run976_L001_R2_001.fastq.gz
+CONS43P5A0      /scratch/bell/fiska/Agolin/064029_CONS43P5A0_S301_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064029_CONS43P5A0_S301_run976_L001_R2_001.fastq.gz
+AGOS44P4A0      /scratch/bell/fiska/Agolin/064030_AGOS44P4A0_S302_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064030_AGOS44P4A0_S302_run976_L001_R2_001.fastq.gz
+CONS45P2A0      /scratch/bell/fiska/Agolin/064031_CONS45P2A0_S303_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064031_CONS45P2A0_S303_run976_L001_R2_001.fastq.gz
+AGOS46P1A0      /scratch/bell/fiska/Agolin/064032_AGOS46P1A0_S304_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064032_AGOS46P1A0_S304_run976_L001_R2_001.fastq.gz
+CONS47P6A0      /scratch/bell/fiska/Agolin/064033_CONS47P6A0_S305_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064033_CONS47P6A0_S305_run976_L001_R2_001.fastq.gz
+AGOS48P4A0      /scratch/bell/fiska/Agolin/064034_AGOS48P4A0_S306_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064034_AGOS48P4A0_S306_run976_L001_R2_001.fastq.gz
+CONS49P6A0      /scratch/bell/fiska/Agolin/064037_CONS49P6A0_S309_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064037_CONS49P6A0_S309_run976_L001_R2_001.fastq.gz
+CONS51P3A0      /scratch/bell/fiska/Agolin/064038_CONS51P3A0_S310_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064038_CONS51P3A0_S310_run976_L001_R2_001.fastq.gz
+CONS52P4A0      /scratch/bell/fiska/Agolin/064039_CONS52P4A0_S311_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064039_CONS52P4A0_S311_run976_L001_R2_001.fastq.gz
+CONS55P5A0      /scratch/bell/fiska/Agolin/064040_CONS55P5A0_S312_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064040_CONS55P5A0_S312_run976_L001_R2_001.fastq.gz
+AGOS56P1A0      /scratch/bell/fiska/Agolin/064041_AGOS56P1A0_S313_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064041_AGOS56P1A0_S313_run976_L001_R2_001.fastq.gz
+AGOS57P4A0      /scratch/bell/fiska/Agolin/064042_AGOS57P4A0_S314_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064042_AGOS57P4A0_S314_run976_L001_R2_001.fastq.gz
+AGOS58P6A0      /scratch/bell/fiska/Agolin/064043_AGOS58P6A0_S315_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064043_AGOS58P6A0_S315_run976_L001_R2_001.fastq.gz
+CONS59P1A0      /scratch/bell/fiska/Agolin/064044_CONS59P1A0_S316_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064044_CONS59P1A0_S316_run976_L001_R2_001.fastq.gz
+AGOS60P3A0      /scratch/bell/fiska/Agolin/064045_AGOS60P3A0_S317_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064045_AGOS60P3A0_S317_run976_L001_R2_001.fastq.gz
+CONS61P4A0      /scratch/bell/fiska/Agolin/064046_CONS61P4A0_S318_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064046_CONS61P4A0_S318_run976_L001_R2_001.fastq.gz
+CONS62P1A0      /scratch/bell/fiska/Agolin/064047_CONS62P1A0_S319_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064047_CONS62P1A0_S319_run976_L001_R2_001.fastq.gz
+CONS37P4A8      /scratch/bell/fiska/Agolin/064048_CONS37P4A8_S320_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064048_CONS37P4A8_S320_run976_L001_R2_001.fastq.gz
+AGOS38P1A8      /scratch/bell/fiska/Agolin/064049_AGOS38P1A8_S321_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064049_AGOS38P1A8_S321_run976_L001_R2_001.fastq.gz
+CONS39P1A8      /scratch/bell/fiska/Agolin/064050_CONS39P1A8_S322_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064050_CONS39P1A8_S322_run976_L001_R2_001.fastq.gz
+CONS41P1A8      /scratch/bell/fiska/Agolin/064051_CONS41P1A8_S323_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064051_CONS41P1A8_S323_run976_L001_R2_001.fastq.gz
+AGOS42P6A8      /scratch/bell/fiska/Agolin/064052_AGOS42P6A8_S324_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064052_AGOS42P6A8_S324_run976_L001_R2_001.fastq.gz
+CONS43P5A8      /scratch/bell/fiska/Agolin/064053_CONS43P5A8_S325_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064053_CONS43P5A8_S325_run976_L001_R2_001.fastq.gz
+AGOS44P4A8      /scratch/bell/fiska/Agolin/064054_AGOS44P4A8_S326_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064054_AGOS44P4A8_S326_run976_L001_R2_001.fastq.gz
+CONS45P2A8      /scratch/bell/fiska/Agolin/064055_CONS45P2A8_S327_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064055_CONS45P2A8_S327_run976_L001_R2_001.fastq.gz
+AGOS46P1A8      /scratch/bell/fiska/Agolin/064056_AGOS46P1A8_S328_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064056_AGOS46P1A8_S328_run976_L001_R2_001.fastq.gz
+CONS47P6A8      /scratch/bell/fiska/Agolin/064057_CONS47P6A8_S329_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064057_CONS47P6A8_S329_run976_L001_R2_001.fastq.gz
+AGOS48P4A8      /scratch/bell/fiska/Agolin/064058_AGOS48P4A8_S330_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064058_AGOS48P4A8_S330_run976_L001_R2_001.fastq.gz
+CONS49P6A8      /scratch/bell/fiska/Agolin/064059_CONS49P6A8_S331_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064059_CONS49P6A8_S331_run976_L001_R2_001.fastq.gz
+AGOS50P1A8      /scratch/bell/fiska/Agolin/064060_AGOS50P1A8_S332_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064060_AGOS50P1A8_S332_run976_L001_R2_001.fastq.gz
+CONS51P3A8      /scratch/bell/fiska/Agolin/064061_CONS51P3A8_S333_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064061_CONS51P3A8_S333_run976_L001_R2_001.fastq.gz
+CONS52P4A8      /scratch/bell/fiska/Agolin/064062_CONS52P4A8_S334_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064062_CONS52P4A8_S334_run976_L001_R2_001.fastq.gz
+AGOS53P1A8      /scratch/bell/fiska/Agolin/064063_AGOS53P1A8_S335_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064063_AGOS53P1A8_S335_run976_L001_R2_001.fastq.gz
+AGOS54P5A8      /scratch/bell/fiska/Agolin/064064_AGOS54P5A8_S336_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064064_AGOS54P5A8_S336_run976_L001_R2_001.fastq.gz
+CONS55P5A8      /scratch/bell/fiska/Agolin/064065_CONS55P5A8_S337_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064065_CONS55P5A8_S337_run976_L001_R2_001.fastq.gz
+AGOS56P1A8      /scratch/bell/fiska/Agolin/064066_AGOS56P1A8_S338_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064066_AGOS56P1A8_S338_run976_L001_R2_001.fastq.gz
+AGOS57P4A8      /scratch/bell/fiska/Agolin/064067_AGOS57P4A8_S339_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064067_AGOS57P4A8_S339_run976_L001_R2_001.fastq.gz
+AGOS58P6A8      /scratch/bell/fiska/Agolin/064068_AGOS58P6A8_S340_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064068_AGOS58P6A8_S340_run976_L001_R2_001.fastq.gz
+CONS59P1A8      /scratch/bell/fiska/Agolin/064069_CONS59P1A8_S341_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064069_CONS59P1A8_S341_run976_L001_R2_001.fastq.gz
+AGOS60P3A8      /scratch/bell/fiska/Agolin/064070_AGOS60P3A8_S342_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064070_AGOS60P3A8_S342_run976_L001_R2_001.fastq.gz
+CONS61P4A8      /scratch/bell/fiska/Agolin/064071_CONS61P4A8_S343_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064071_CONS61P4A8_S343_run976_L001_R2_001.fastq.gz
+CONS62P1A8      /scratch/bell/fiska/Agolin/064072_CONS62P1A8_S344_run976_L001_R1_001.fastq.gz/scratch/bell/fiska/Agolin/064072_CONS62P1A8_S344_run976_L001_R2_001.fastq.gz
+CONS37P4A16     /scratch/bell/fiska/Agolin/064073_CONS37P4A16_S345_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064073_CONS37P4A16_S345_run976_L001_R2_001.fastq.gz
+AGOS38P1A16     /scratch/bell/fiska/Agolin/064074_AGOS38P1A16_S346_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064074_AGOS38P1A16_S346_run976_L001_R2_001.fastq.gz
+CONS39P1A16     /scratch/bell/fiska/Agolin/064075_CONS39P1A16_S347_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064075_CONS39P1A16_S347_run976_L001_R2_001.fastq.gz
+CONS41P1A16     /scratch/bell/fiska/Agolin/064076_CONS41P1A16_S348_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064076_CONS41P1A16_S348_run976_L001_R2_001.fastq.gz
+AGOS42P6A16     /scratch/bell/fiska/Agolin/064077_AGOS42P6A16_S349_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064077_AGOS42P6A16_S349_run976_L001_R2_001.fastq.gz
+CONS43P5A16     /scratch/bell/fiska/Agolin/064078_CONS43P5A16_S350_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064078_CONS43P5A16_S350_run976_L001_R2_001.fastq.gz
+AGOS44P4A16     /scratch/bell/fiska/Agolin/064079_AGOS44P4A16_S351_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064079_AGOS44P4A16_S351_run976_L001_R2_001.fastq.gz
+CONS45P2A16     /scratch/bell/fiska/Agolin/064080_CONS45P2A16_S352_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064080_CONS45P2A16_S352_run976_L001_R2_001.fastq.gz
+AGOS46P1A16     /scratch/bell/fiska/Agolin/064081_AGOS46P1A16_S353_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064081_AGOS46P1A16_S353_run976_L001_R2_001.fastq.gz
+CONS47P6A16     /scratch/bell/fiska/Agolin/064082_CONS47P6A16_S354_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064082_CONS47P6A16_S354_run976_L001_R2_001.fastq.gz
+AGOS48P4A16     /scratch/bell/fiska/Agolin/064083_AGOS48P4A16_S355_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064083_AGOS48P4A16_S355_run976_L001_R2_001.fastq.gz
+CONS49P6A16     /scratch/bell/fiska/Agolin/064084_CONS49P6A16_S356_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064084_CONS49P6A16_S356_run976_L001_R2_001.fastq.gz
+AGOS50P1A16     /scratch/bell/fiska/Agolin/064085_AGOS50P1A16_S357_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064085_AGOS50P1A16_S357_run976_L001_R2_001.fastq.gz
+CONS51P3A16     /scratch/bell/fiska/Agolin/064086_CONS51P3A16_S358_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064086_CONS51P3A16_S358_run976_L001_R2_001.fastq.gz
+CONS52P4A16     /scratch/bell/fiska/Agolin/064087_CONS52P4A16_S359_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064087_CONS52P4A16_S359_run976_L001_R2_001.fastq.gz
+AGOS53P1A16     /scratch/bell/fiska/Agolin/064088_AGOS53P1A16_S360_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064088_AGOS53P1A16_S360_run976_L001_R2_001.fastq.gz
+AGOS54P5A16     /scratch/bell/fiska/Agolin/064089_AGOS54P5A16_S361_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064089_AGOS54P5A16_S361_run976_L001_R2_001.fastq.gz
+CONS55P5A16     /scratch/bell/fiska/Agolin/064090_CONS55P5A16_S362_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064090_CONS55P5A16_S362_run976_L001_R2_001.fastq.gz
+AGOS56P1A16     /scratch/bell/fiska/Agolin/064091_AGOS56P1A16_S363_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064091_AGOS56P1A16_S363_run976_L001_R2_001.fastq.gz
+AGOS57P4A16     /scratch/bell/fiska/Agolin/064092_AGOS57P4A16_S364_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064092_AGOS57P4A16_S364_run976_L001_R2_001.fastq.gz
+AGOS58P6A16     /scratch/bell/fiska/Agolin/064093_AGOS58P6A16_S365_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064093_AGOS58P6A16_S365_run976_L001_R2_001.fastq.gz
+CONS59P1A16     /scratch/bell/fiska/Agolin/064094_CONS59P1A16_S366_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064094_CONS59P1A16_S366_run976_L001_R2_001.fastq.gz
+AGOS60P3A16     /scratch/bell/fiska/Agolin/064095_AGOS60P3A16_S367_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064095_AGOS60P3A16_S367_run976_L001_R2_001.fastq.gz
+CONS61P4A16     /scratch/bell/fiska/Agolin/064096_CONS61P4A16_S368_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064096_CONS61P4A16_S368_run976_L001_R2_001.fastq.gz
+CONS62P1A16     /scratch/bell/fiska/Agolin/064097_CONS62P1A16_S369_run976_L001_R1_001.fastq.gz       /scratch/bell/fiska/Agolin/064097_CONS62P1A16_S369_run976_L001_R2_001.fastq.gz
+bash-4.2$ cat agolin_manifest.txt
+sample_id       forward-absolute-filepath       reverse-absolute-filepath
+CONS37P4B14     /scratch/bell/fiska/Agolin/fastq_files/063974_CONS37P4B14_S246_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063974_CONS37P4B14_S246_run976_L001_R2_001.fastq.gz
+AGOS38P1B14     /scratch/bell/fiska/Agolin/fastq_files/063975_AGOS38P1B14_S247_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063975_AGOS38P1B14_S247_run976_L001_R2_001.fastq.gz
+CONS39P1B14     /scratch/bell/fiska/Agolin/fastq_files/063976_CONS39P1B14_S248_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063976_CONS39P1B14_S248_run976_L001_R2_001.fastq.gz
+CONS41P1B14     /scratch/bell/fiska/Agolin/fastq_files/063977_CONS41P1B14_S249_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063977_CONS41P1B14_S249_run976_L001_R2_001.fastq.gz
+AGOS42P6B14     /scratch/bell/fiska/Agolin/fastq_files/063978_AGOS42P6B14_S250_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063978_AGOS42P6B14_S250_run976_L001_R2_001.fastq.gz
+CONS43P5B14     /scratch/bell/fiska/Agolin/fastq_files/063979_CONS43P5B14_S251_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063979_CONS43P5B14_S251_run976_L001_R2_001.fastq.gz
+AGOS44P4B14     /scratch/bell/fiska/Agolin/fastq_files/063980_AGOS44P4B14_S252_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063980_AGOS44P4B14_S252_run976_L001_R2_001.fastq.gz
+CONS45P2B14     /scratch/bell/fiska/Agolin/fastq_files/063981_CONS45P2B14_S253_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063981_CONS45P2B14_S253_run976_L001_R2_001.fastq.gz
+AGOS46P1B14     /scratch/bell/fiska/Agolin/fastq_files/063982_AGOS46P1B14_S254_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063982_AGOS46P1B14_S254_run976_L001_R2_001.fastq.gz
+CONS47P6B14     /scratch/bell/fiska/Agolin/fastq_files/063983_CONS47P6B14_S255_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063983_CONS47P6B14_S255_run976_L001_R2_001.fastq.gz
+AGOS48P4B14     /scratch/bell/fiska/Agolin/fastq_files/063984_AGOS48P4B14_S256_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063984_AGOS48P4B14_S256_run976_L001_R2_001.fastq.gz
+CONS49P6B14     /scratch/bell/fiska/Agolin/fastq_files/063985_CONS49P6B14_S257_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063985_CONS49P6B14_S257_run976_L001_R2_001.fastq.gz
+AGOS50P1B14     /scratch/bell/fiska/Agolin/fastq_files/063986_AGOS50P1B14_S258_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063986_AGOS50P1B14_S258_run976_L001_R2_001.fastq.gz
+CONS51P3B14     /scratch/bell/fiska/Agolin/fastq_files/063987_CONS51P3B14_S259_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063987_CONS51P3B14_S259_run976_L001_R2_001.fastq.gz
+CONS52P4B14     /scratch/bell/fiska/Agolin/fastq_files/063988_CONS52P4B14_S260_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063988_CONS52P4B14_S260_run976_L001_R2_001.fastq.gz
+AGOS53P1B14     /scratch/bell/fiska/Agolin/fastq_files/063989_AGOS53P1B14_S261_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063989_AGOS53P1B14_S261_run976_L001_R2_001.fastq.gz
+AGOS54P5B14     /scratch/bell/fiska/Agolin/fastq_files/063990_AGOS54P5B14_S262_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063990_AGOS54P5B14_S262_run976_L001_R2_001.fastq.gz
+CONS55P5B14     /scratch/bell/fiska/Agolin/fastq_files/063991_CONS55P5B14_S263_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063991_CONS55P5B14_S263_run976_L001_R2_001.fastq.gz
+AGOS56P1B14     /scratch/bell/fiska/Agolin/fastq_files/063992_AGOS56P1B14_S264_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063992_AGOS56P1B14_S264_run976_L001_R2_001.fastq.gz
+AGOS57P4B14     /scratch/bell/fiska/Agolin/fastq_files/063993_AGOS57P4B14_S265_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063993_AGOS57P4B14_S265_run976_L001_R2_001.fastq.gz
+AGOS58P6B14     /scratch/bell/fiska/Agolin/fastq_files/063994_AGOS58P6B14_S266_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063994_AGOS58P6B14_S266_run976_L001_R2_001.fastq.gz
+CONS59P1B14     /scratch/bell/fiska/Agolin/fastq_files/063995_CONS59P1B14_S267_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063995_CONS59P1B14_S267_run976_L001_R2_001.fastq.gz
+AGOS60P3B14     /scratch/bell/fiska/Agolin/fastq_files/063996_AGOS60P3B14_S268_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063996_AGOS60P3B14_S268_run976_L001_R2_001.fastq.gz
+CONS61P4B14     /scratch/bell/fiska/Agolin/fastq_files/063997_CONS61P4B14_S269_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063997_CONS61P4B14_S269_run976_L001_R2_001.fastq.gz
+CONS62P1B14     /scratch/bell/fiska/Agolin/fastq_files/063998_CONS62P1B14_S270_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/063998_CONS62P1B14_S270_run976_L001_R2_001.fastq.gz
+CONS37P4B7      /scratch/bell/fiska/Agolin/fastq_files/063999_CONS37P4B7_S271_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/063999_CONS37P4B7_S271_run976_L001_R2_001.fastq.gz
+AGOS38P1B7      /scratch/bell/fiska/Agolin/fastq_files/064000_AGOS38P1B7_S272_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064000_AGOS38P1B7_S272_run976_L001_R2_001.fastq.gz
+CONS39P1B7      /scratch/bell/fiska/Agolin/fastq_files/064001_CONS39P1B7_S273_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064001_CONS39P1B7_S273_run976_L001_R2_001.fastq.gz
+CONS41P1B7      /scratch/bell/fiska/Agolin/fastq_files/064002_CONS41P1B7_S274_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064002_CONS41P1B7_S274_run976_L001_R2_001.fastq.gz
+AGOS42P6B7      /scratch/bell/fiska/Agolin/fastq_files/064003_AGOS42P6B7_S275_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064003_AGOS42P6B7_S275_run976_L001_R2_001.fastq.gz
+CONS43P5B7      /scratch/bell/fiska/Agolin/fastq_files/064004_CONS43P5B7_S276_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064004_CONS43P5B7_S276_run976_L001_R2_001.fastq.gz
+AGOS44P4B7      /scratch/bell/fiska/Agolin/fastq_files/064005_AGOS44P4B7_S277_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064005_AGOS44P4B7_S277_run976_L001_R2_001.fastq.gz
+CONS45P2B7      /scratch/bell/fiska/Agolin/fastq_files/064006_CONS45P2B7_S278_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064006_CONS45P2B7_S278_run976_L001_R2_001.fastq.gz
+AGOS46P1B7      /scratch/bell/fiska/Agolin/fastq_files/064007_AGOS46P1B7_S279_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064007_AGOS46P1B7_S279_run976_L001_R2_001.fastq.gz
+CONS47P6B7      /scratch/bell/fiska/Agolin/fastq_files/064008_CONS47P6B7_S280_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064008_CONS47P6B7_S280_run976_L001_R2_001.fastq.gz
+AGOS48P4B7      /scratch/bell/fiska/Agolin/fastq_files/064009_AGOS48P4B7_S281_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064009_AGOS48P4B7_S281_run976_L001_R2_001.fastq.gz
+CONS49P6B7      /scratch/bell/fiska/Agolin/fastq_files/064010_CONS49P6B7_S282_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064010_CONS49P6B7_S282_run976_L001_R2_001.fastq.gz
+AGOS50P1B7      /scratch/bell/fiska/Agolin/fastq_files/064011_AGOS50P1B7_S283_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064011_AGOS50P1B7_S283_run976_L001_R2_001.fastq.gz
+CONS51P3B7      /scratch/bell/fiska/Agolin/fastq_files/064012_CONS51P3B7_S284_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064012_CONS51P3B7_S284_run976_L001_R2_001.fastq.gz
+CONS52P4B7      /scratch/bell/fiska/Agolin/fastq_files/064013_CONS52P4B7_S285_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064013_CONS52P4B7_S285_run976_L001_R2_001.fastq.gz
+AGOS53P1B7      /scratch/bell/fiska/Agolin/fastq_files/064014_AGOS53P1B7_S286_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064014_AGOS53P1B7_S286_run976_L001_R2_001.fastq.gz
+AGOS54P5B7      /scratch/bell/fiska/Agolin/fastq_files/064015_AGOS54P5B7_S287_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064015_AGOS54P5B7_S287_run976_L001_R2_001.fastq.gz
+CONS55P5B7      /scratch/bell/fiska/Agolin/fastq_files/064016_CONS55P5B7_S288_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064016_CONS55P5B7_S288_run976_L001_R2_001.fastq.gz
+AGOS56P1B7      /scratch/bell/fiska/Agolin/fastq_files/064017_AGOS56P1B7_S289_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064017_AGOS56P1B7_S289_run976_L001_R2_001.fastq.gz
+AGOS57P4B7      /scratch/bell/fiska/Agolin/fastq_files/064018_AGOS57P4B7_S290_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064018_AGOS57P4B7_S290_run976_L001_R2_001.fastq.gz
+AGOS58P6B7      /scratch/bell/fiska/Agolin/fastq_files/064019_AGOS58P6B7_S291_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064019_AGOS58P6B7_S291_run976_L001_R2_001.fastq.gz
+CONS59P1B7      /scratch/bell/fiska/Agolin/fastq_files/064020_CONS59P1B7_S292_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064020_CONS59P1B7_S292_run976_L001_R2_001.fastq.gz
+AGOS60P3B7      /scratch/bell/fiska/Agolin/fastq_files/064021_AGOS60P3B7_S293_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064021_AGOS60P3B7_S293_run976_L001_R2_001.fastq.gz
+CONS61P4B7      /scratch/bell/fiska/Agolin/fastq_files/064022_CONS61P4B7_S294_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064022_CONS61P4B7_S294_run976_L001_R2_001.fastq.gz
+CONS62P1B7      /scratch/bell/fiska/Agolin/fastq_files/064023_CONS62P1B7_S295_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064023_CONS62P1B7_S295_run976_L001_R2_001.fastq.gz
+CONS37P4A0      /scratch/bell/fiska/Agolin/fastq_files/064024_CONS37P4A0_S296_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064024_CONS37P4A0_S296_run976_L001_R2_001.fastq.gz
+AGOS38P1A0      /scratch/bell/fiska/Agolin/fastq_files/064025_AGOS38P1A0_S297_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064025_AGOS38P1A0_S297_run976_L001_R2_001.fastq.gz
+CONS39P1A0      /scratch/bell/fiska/Agolin/fastq_files/064026_CONS39P1A0_S298_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064026_CONS39P1A0_S298_run976_L001_R2_001.fastq.gz
+CONS41P1A0      /scratch/bell/fiska/Agolin/fastq_files/064027_CONS41P1A0_S299_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064027_CONS41P1A0_S299_run976_L001_R2_001.fastq.gz
+AGOS42P6A0      /scratch/bell/fiska/Agolin/fastq_files/064028_AGOS42P6A0_S300_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064028_AGOS42P6A0_S300_run976_L001_R2_001.fastq.gz
+CONS43P5A0      /scratch/bell/fiska/Agolin/fastq_files/064029_CONS43P5A0_S301_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064029_CONS43P5A0_S301_run976_L001_R2_001.fastq.gz
+AGOS44P4A0      /scratch/bell/fiska/Agolin/fastq_files/064030_AGOS44P4A0_S302_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064030_AGOS44P4A0_S302_run976_L001_R2_001.fastq.gz
+CONS45P2A0      /scratch/bell/fiska/Agolin/fastq_files/064031_CONS45P2A0_S303_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064031_CONS45P2A0_S303_run976_L001_R2_001.fastq.gz
+AGOS46P1A0      /scratch/bell/fiska/Agolin/fastq_files/064032_AGOS46P1A0_S304_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064032_AGOS46P1A0_S304_run976_L001_R2_001.fastq.gz
+CONS47P6A0      /scratch/bell/fiska/Agolin/fastq_files/064033_CONS47P6A0_S305_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064033_CONS47P6A0_S305_run976_L001_R2_001.fastq.gz
+AGOS48P4A0      /scratch/bell/fiska/Agolin/fastq_files/064034_AGOS48P4A0_S306_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064034_AGOS48P4A0_S306_run976_L001_R2_001.fastq.gz
+CONS49P6A0      /scratch/bell/fiska/Agolin/fastq_files/064037_CONS49P6A0_S309_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064037_CONS49P6A0_S309_run976_L001_R2_001.fastq.gz
+CONS51P3A0      /scratch/bell/fiska/Agolin/fastq_files/064038_CONS51P3A0_S310_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064038_CONS51P3A0_S310_run976_L001_R2_001.fastq.gz
+CONS52P4A0      /scratch/bell/fiska/Agolin/fastq_files/064039_CONS52P4A0_S311_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064039_CONS52P4A0_S311_run976_L001_R2_001.fastq.gz
+CONS55P5A0      /scratch/bell/fiska/Agolin/fastq_files/064040_CONS55P5A0_S312_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064040_CONS55P5A0_S312_run976_L001_R2_001.fastq.gz
+AGOS56P1A0      /scratch/bell/fiska/Agolin/fastq_files/064041_AGOS56P1A0_S313_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064041_AGOS56P1A0_S313_run976_L001_R2_001.fastq.gz
+AGOS57P4A0      /scratch/bell/fiska/Agolin/fastq_files/064042_AGOS57P4A0_S314_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064042_AGOS57P4A0_S314_run976_L001_R2_001.fastq.gz
+AGOS58P6A0      /scratch/bell/fiska/Agolin/fastq_files/064043_AGOS58P6A0_S315_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064043_AGOS58P6A0_S315_run976_L001_R2_001.fastq.gz
+CONS59P1A0      /scratch/bell/fiska/Agolin/fastq_files/064044_CONS59P1A0_S316_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064044_CONS59P1A0_S316_run976_L001_R2_001.fastq.gz
+AGOS60P3A0      /scratch/bell/fiska/Agolin/fastq_files/064045_AGOS60P3A0_S317_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064045_AGOS60P3A0_S317_run976_L001_R2_001.fastq.gz
+CONS61P4A0      /scratch/bell/fiska/Agolin/fastq_files/064046_CONS61P4A0_S318_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064046_CONS61P4A0_S318_run976_L001_R2_001.fastq.gz
+CONS62P1A0      /scratch/bell/fiska/Agolin/fastq_files/064047_CONS62P1A0_S319_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064047_CONS62P1A0_S319_run976_L001_R2_001.fastq.gz
+CONS37P4A8      /scratch/bell/fiska/Agolin/fastq_files/064048_CONS37P4A8_S320_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064048_CONS37P4A8_S320_run976_L001_R2_001.fastq.gz
+AGOS38P1A8      /scratch/bell/fiska/Agolin/fastq_files/064049_AGOS38P1A8_S321_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064049_AGOS38P1A8_S321_run976_L001_R2_001.fastq.gz
+CONS39P1A8      /scratch/bell/fiska/Agolin/fastq_files/064050_CONS39P1A8_S322_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064050_CONS39P1A8_S322_run976_L001_R2_001.fastq.gz
+CONS41P1A8      /scratch/bell/fiska/Agolin/fastq_files/064051_CONS41P1A8_S323_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064051_CONS41P1A8_S323_run976_L001_R2_001.fastq.gz
+AGOS42P6A8      /scratch/bell/fiska/Agolin/fastq_files/064052_AGOS42P6A8_S324_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064052_AGOS42P6A8_S324_run976_L001_R2_001.fastq.gz
+CONS43P5A8      /scratch/bell/fiska/Agolin/fastq_files/064053_CONS43P5A8_S325_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064053_CONS43P5A8_S325_run976_L001_R2_001.fastq.gz
+AGOS44P4A8      /scratch/bell/fiska/Agolin/fastq_files/064054_AGOS44P4A8_S326_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064054_AGOS44P4A8_S326_run976_L001_R2_001.fastq.gz
+CONS45P2A8      /scratch/bell/fiska/Agolin/fastq_files/064055_CONS45P2A8_S327_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064055_CONS45P2A8_S327_run976_L001_R2_001.fastq.gz
+AGOS46P1A8      /scratch/bell/fiska/Agolin/fastq_files/064056_AGOS46P1A8_S328_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064056_AGOS46P1A8_S328_run976_L001_R2_001.fastq.gz
+CONS47P6A8      /scratch/bell/fiska/Agolin/fastq_files/064057_CONS47P6A8_S329_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064057_CONS47P6A8_S329_run976_L001_R2_001.fastq.gz
+AGOS48P4A8      /scratch/bell/fiska/Agolin/fastq_files/064058_AGOS48P4A8_S330_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064058_AGOS48P4A8_S330_run976_L001_R2_001.fastq.gz
+CONS49P6A8      /scratch/bell/fiska/Agolin/fastq_files/064059_CONS49P6A8_S331_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064059_CONS49P6A8_S331_run976_L001_R2_001.fastq.gz
+AGOS50P1A8      /scratch/bell/fiska/Agolin/fastq_files/064060_AGOS50P1A8_S332_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064060_AGOS50P1A8_S332_run976_L001_R2_001.fastq.gz
+CONS51P3A8      /scratch/bell/fiska/Agolin/fastq_files/064061_CONS51P3A8_S333_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064061_CONS51P3A8_S333_run976_L001_R2_001.fastq.gz
+CONS52P4A8      /scratch/bell/fiska/Agolin/fastq_files/064062_CONS52P4A8_S334_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064062_CONS52P4A8_S334_run976_L001_R2_001.fastq.gz
+AGOS53P1A8      /scratch/bell/fiska/Agolin/fastq_files/064063_AGOS53P1A8_S335_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064063_AGOS53P1A8_S335_run976_L001_R2_001.fastq.gz
+AGOS54P5A8      /scratch/bell/fiska/Agolin/fastq_files/064064_AGOS54P5A8_S336_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064064_AGOS54P5A8_S336_run976_L001_R2_001.fastq.gz
+CONS55P5A8      /scratch/bell/fiska/Agolin/fastq_files/064065_CONS55P5A8_S337_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064065_CONS55P5A8_S337_run976_L001_R2_001.fastq.gz
+AGOS56P1A8      /scratch/bell/fiska/Agolin/fastq_files/064066_AGOS56P1A8_S338_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064066_AGOS56P1A8_S338_run976_L001_R2_001.fastq.gz
+AGOS57P4A8      /scratch/bell/fiska/Agolin/fastq_files/064067_AGOS57P4A8_S339_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064067_AGOS57P4A8_S339_run976_L001_R2_001.fastq.gz
+AGOS58P6A8      /scratch/bell/fiska/Agolin/fastq_files/064068_AGOS58P6A8_S340_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064068_AGOS58P6A8_S340_run976_L001_R2_001.fastq.gz
+CONS59P1A8      /scratch/bell/fiska/Agolin/fastq_files/064069_CONS59P1A8_S341_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064069_CONS59P1A8_S341_run976_L001_R2_001.fastq.gz
+AGOS60P3A8      /scratch/bell/fiska/Agolin/fastq_files/064070_AGOS60P3A8_S342_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064070_AGOS60P3A8_S342_run976_L001_R2_001.fastq.gz
+CONS61P4A8      /scratch/bell/fiska/Agolin/fastq_files/064071_CONS61P4A8_S343_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064071_CONS61P4A8_S343_run976_L001_R2_001.fastq.gz
+CONS62P1A8      /scratch/bell/fiska/Agolin/fastq_files/064072_CONS62P1A8_S344_run976_L001_R1_001.fastq.gz    /scratch/bell/fiska/Agolin/fastq_files/064072_CONS62P1A8_S344_run976_L001_R2_001.fastq.gz
+CONS37P4A16     /scratch/bell/fiska/Agolin/fastq_files/064073_CONS37P4A16_S345_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064073_CONS37P4A16_S345_run976_L001_R2_001.fastq.gz
+AGOS38P1A16     /scratch/bell/fiska/Agolin/fastq_files/064074_AGOS38P1A16_S346_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064074_AGOS38P1A16_S346_run976_L001_R2_001.fastq.gz
+CONS39P1A16     /scratch/bell/fiska/Agolin/fastq_files/064075_CONS39P1A16_S347_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064075_CONS39P1A16_S347_run976_L001_R2_001.fastq.gz
+CONS41P1A16     /scratch/bell/fiska/Agolin/fastq_files/064076_CONS41P1A16_S348_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064076_CONS41P1A16_S348_run976_L001_R2_001.fastq.gz
+AGOS42P6A16     /scratch/bell/fiska/Agolin/fastq_files/064077_AGOS42P6A16_S349_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064077_AGOS42P6A16_S349_run976_L001_R2_001.fastq.gz
+CONS43P5A16     /scratch/bell/fiska/Agolin/fastq_files/064078_CONS43P5A16_S350_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064078_CONS43P5A16_S350_run976_L001_R2_001.fastq.gz
+AGOS44P4A16     /scratch/bell/fiska/Agolin/fastq_files/064079_AGOS44P4A16_S351_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064079_AGOS44P4A16_S351_run976_L001_R2_001.fastq.gz
+CONS45P2A16     /scratch/bell/fiska/Agolin/fastq_files/064080_CONS45P2A16_S352_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064080_CONS45P2A16_S352_run976_L001_R2_001.fastq.gz
+AGOS46P1A16     /scratch/bell/fiska/Agolin/fastq_files/064081_AGOS46P1A16_S353_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064081_AGOS46P1A16_S353_run976_L001_R2_001.fastq.gz
+CONS47P6A16     /scratch/bell/fiska/Agolin/fastq_files/064082_CONS47P6A16_S354_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064082_CONS47P6A16_S354_run976_L001_R2_001.fastq.gz
+AGOS48P4A16     /scratch/bell/fiska/Agolin/fastq_files/064083_AGOS48P4A16_S355_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064083_AGOS48P4A16_S355_run976_L001_R2_001.fastq.gz
+CONS49P6A16     /scratch/bell/fiska/Agolin/fastq_files/064084_CONS49P6A16_S356_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064084_CONS49P6A16_S356_run976_L001_R2_001.fastq.gz
+AGOS50P1A16     /scratch/bell/fiska/Agolin/fastq_files/064085_AGOS50P1A16_S357_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064085_AGOS50P1A16_S357_run976_L001_R2_001.fastq.gz
+CONS51P3A16     /scratch/bell/fiska/Agolin/fastq_files/064086_CONS51P3A16_S358_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064086_CONS51P3A16_S358_run976_L001_R2_001.fastq.gz
+CONS52P4A16     /scratch/bell/fiska/Agolin/fastq_files/064087_CONS52P4A16_S359_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064087_CONS52P4A16_S359_run976_L001_R2_001.fastq.gz
+AGOS53P1A16     /scratch/bell/fiska/Agolin/fastq_files/064088_AGOS53P1A16_S360_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064088_AGOS53P1A16_S360_run976_L001_R2_001.fastq.gz
+AGOS54P5A16     /scratch/bell/fiska/Agolin/fastq_files/064089_AGOS54P5A16_S361_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064089_AGOS54P5A16_S361_run976_L001_R2_001.fastq.gz
+CONS55P5A16     /scratch/bell/fiska/Agolin/fastq_files/064090_CONS55P5A16_S362_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064090_CONS55P5A16_S362_run976_L001_R2_001.fastq.gz
+AGOS56P1A16     /scratch/bell/fiska/Agolin/fastq_files/064091_AGOS56P1A16_S363_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064091_AGOS56P1A16_S363_run976_L001_R2_001.fastq.gz
+AGOS57P4A16     /scratch/bell/fiska/Agolin/fastq_files/064092_AGOS57P4A16_S364_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064092_AGOS57P4A16_S364_run976_L001_R2_001.fastq.gz
+AGOS58P6A16     /scratch/bell/fiska/Agolin/fastq_files/064093_AGOS58P6A16_S365_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064093_AGOS58P6A16_S365_run976_L001_R2_001.fastq.gz
+CONS59P1A16     /scratch/bell/fiska/Agolin/fastq_files/064094_CONS59P1A16_S366_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064094_CONS59P1A16_S366_run976_L001_R2_001.fastq.gz
+AGOS60P3A16     /scratch/bell/fiska/Agolin/fastq_files/064095_AGOS60P3A16_S367_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064095_AGOS60P3A16_S367_run976_L001_R2_001.fastq.gz
+CONS61P4A16     /scratch/bell/fiska/Agolin/fastq_files/064096_CONS61P4A16_S368_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064096_CONS61P4A16_S368_run976_L001_R2_001.fastq.gz
+CONS62P1A16     /scratch/bell/fiska/Agolin/fastq_files/064097_CONS62P1A16_S369_run976_L001_R1_001.fastq.gz   /scratch/bell/fiska/Agolin/fastq_files/064097_CONS62P1A16_S369_run976_L001_R2_001.fastq.gz
+bash-4.2$ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' --input-path agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+There was a problem importing agolin_manifest.txt:
+
+  agolin_manifest.txt is not a(n) PairedEndFastqManifestPhred33V2 file:
+
+  Found unrecognized ID column name 'sample_id' while searching for header. The first column name in the header defines the ID column, and must be one of these values:
+
+  Case-insensitive: 'feature id', 'feature-id', 'featureid', 'id', 'sample id', 'sample-id', 'sampleid'
+
+  Case-sensitive: '#OTU ID', '#OTUID', '#Sample ID', '#SampleID', 'sample_name'
+
+  NOTE: Metadata files must contain tab-separated values.
+
+  There may be more errors present in the metadata file. To get a full report, sample/feature metadata files can be validated with Keemei: https://keemei.qiime2.org
+
+  Find details on QIIME 2 metadata requirements here: https://docs.qiime2.org/2022.8/tutorials/metadata/
+
+bash-4.2$ qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' --input-path agolin_manifest.txt --input-format PairedEndFastqManifestPhred33V2 --output-path demux.qza
+Imported agolin_manifest.txt as PairedEndFastqManifestPhred33V2 to demux.qza
+bash-4.2$ qiime demux summarize \
+>   --i-data demux.qza \
+>   --o-visualization demux.qzv
+Saved Visualization to: demux.qzv
+bash-4.2$ qiime dada2 denoise-paired \
+ --i-demultiplexed-seqs demux.qza \
+   --p-trim-left-f 13 \
+   --p-trim-left-r 13 \
+   --p-trunc-len-f 250 \
+   --p-trunc-len-r 130 \
+   --o-table table.qza \
+   --o-representative-sequences rep-seqs.qza \
+   --o-denoising-stats denoising-stats.qza

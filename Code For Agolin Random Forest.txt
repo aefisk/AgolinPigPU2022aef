@@ -1,0 +1,310 @@
+#Random Forest
+qiime sample-classifier classify-samples \
+  --i-table day-14-filtered-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-optimize-feature-selection \
+  --p-parameter-tuning \
+  --p-estimator RandomForestClassifier \
+  --p-n-estimators 75 \
+  --p-random-state 124 \
+  --output-dir Random_Forest_day-14
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day-14/predictions.qza \
+  --o-visualization Random_Forest_day-14/predictions.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day-14/probabilities.qza \
+  --o-visualization Random_Forest_day-14/probabilities.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day-14/feature_importance.qza \
+  --o-visualization Random_Forest_day-14/feature_importance.qzv
+
+qiime feature-table filter-features \
+  --i-table day-14-filtered-table.qza \
+  --m-metadata-file Random_Forest_day-14/feature_importance.qza \
+  --o-filtered-table Random_Forest_day-14/important-feature-table.qza
+
+qiime sample-classifier heatmap \
+  --i-table day-14-filtered-table.qza \
+  --i-importance Random_Forest_day-14/feature_importance.qza \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv \
+  --m-sample-metadata-column trt \
+  --p-group-samples \
+  --p-feature-count 20 \
+  --o-filtered-table Random_Forest_day-14/important-feature-table-top-20.qza \
+  --o-heatmap Random_Forest_day-14/important-feature-heatmap.qzv
+
+qiime sample-classifier heatmap \
+--i-table day-14-filtered-table.qza \
+--i-importance Random_Forest_day-14/feature_importance.qza  \
+--m-sample-metadata-file Agolin-sample-metadata.tsv  \
+--m-sample-metadata-column trt \
+--m-feature-metadata-file taxonomy.qza \
+--m-feature-metadata-column Taxon \
+--p-group-samples  \
+--p-feature-count 20  \
+--o-filtered-table Random_Forest_day-14/important-feature-table-taxonomy-top-20.qza \
+--o-heatmap Random_Forest_day-14/important-feature-heatmap-taxonomy.qzv
+
+#Random Forest
+qiime sample-classifier classify-samples \
+  --i-table day-7-filtered-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-optimize-feature-selection \
+  --p-parameter-tuning \
+  --p-estimator RandomForestClassifier \
+  --p-n-estimators 75 \
+  --p-random-state 124 \
+  --output-dir Random_Forest_day-7
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day-7/predictions.qza \
+  --o-visualization Random_Forest_day-7/predictions.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day-7/probabilities.qza \
+  --o-visualization Random_Forest_day-7/probabilities.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day-7/feature_importance.qza \
+  --o-visualization Random_Forest_day-7/feature_importance.qzv
+
+qiime feature-table filter-features \
+  --i-table day-7-filtered-table.qza \
+  --m-metadata-file Random_Forest_day-7/feature_importance.qza \
+  --o-filtered-table Random_Forest_day-7/important-feature-table.qza
+
+qiime sample-classifier heatmap \
+  --i-table day-7-filtered-table.qza \
+  --i-importance Random_Forest_day-7/feature_importance.qza \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv \
+  --m-sample-metadata-column trt \
+  --p-group-samples \
+  --p-feature-count 20 \
+  --o-filtered-table Random_Forest_day-7/important-feature-table-top-20.qza \
+  --o-heatmap Random_Forest_day-7/important-feature-heatmap.qzv
+
+qiime sample-classifier heatmap \
+--i-table day-7-filtered-table.qza \
+--i-importance Random_Forest_day-7/feature_importance.qza  \
+--m-sample-metadata-file Agolin-sample-metadata.tsv  \
+--m-sample-metadata-column trt \
+--m-feature-metadata-file taxonomy.qza \
+--m-feature-metadata-column Taxon \
+--p-group-samples  \
+--p-feature-count 20  \
+--o-filtered-table Random_Forest_day-7/important-feature-table-taxonomy-top-20.qza \
+--o-heatmap Random_Forest_day-7/important-feature-heatmap-taxonomy.qzv
+
+
+#Random Forest
+qiime sample-classifier classify-samples \
+  --i-table day0-filtered-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-optimize-feature-selection \
+  --p-parameter-tuning \
+  --p-estimator RandomForestClassifier \
+  --p-n-estimators 75 \
+  --p-random-state 124 \
+  --output-dir Random_Forest_day0
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day0/predictions.qza \
+  --o-visualization Random_Forest_day0/predictions.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day0/probabilities.qza \
+  --o-visualization Random_Forest_day0/probabilities.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day0/feature_importance.qza \
+  --o-visualization Random_Forest_day0/feature_importance.qzv
+
+qiime feature-table filter-features \
+  --i-table day0-filtered-table.qza \
+  --m-metadata-file Random_Forest_day0/feature_importance.qza \
+  --o-filtered-table Random_Forest_day0/important-feature-table.qza
+
+qiime sample-classifier heatmap \
+  --i-table day0-filtered-table.qza \
+  --i-importance Random_Forest_day0/feature_importance.qza \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv \
+  --m-sample-metadata-column trt \
+  --p-group-samples \
+  --p-feature-count 20 \
+  --o-filtered-table Random_Forest_day0/important-feature-table-top-20.qza \
+  --o-heatmap Random_Forest_day0/important-feature-heatmap.qzv
+
+qiime sample-classifier heatmap \
+--i-table day0-filtered-table.qza \
+--i-importance Random_Forest_day0/feature_importance.qza  \
+--m-sample-metadata-file Agolin-sample-metadata.tsv  \
+--m-sample-metadata-column trt \
+--m-feature-metadata-file taxonomy.qza \
+--m-feature-metadata-column Taxon \
+--p-group-samples  \
+--p-feature-count 20  \
+--o-filtered-table Random_Forest_day0/important-feature-table-taxonomy-top-20.qza \
+--o-heatmap Random_Forest_day0/important-feature-heatmap-taxonomy.qzv
+
+
+#Random Forest
+qiime sample-classifier classify-samples \
+  --i-table day8-filtered-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-optimize-feature-selection \
+  --p-parameter-tuning \
+  --p-estimator RandomForestClassifier \
+  --p-n-estimators 75 \
+  --p-random-state 120 \
+  --output-dir Random_Forest_day8
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day8/predictions.qza \
+  --o-visualization Random_Forest_day8/predictions.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day8/probabilities.qza \
+  --o-visualization Random_Forest_day8/probabilities.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day8/feature_importance.qza \
+  --o-visualization Random_Forest_day8/feature_importance.qzv
+
+qiime feature-table filter-features \
+  --i-table day8-filtered-table.qza \
+  --m-metadata-file Random_Forest_day8/feature_importance.qza \
+  --o-filtered-table Random_Forest_day8/important-feature-table.qza
+
+qiime sample-classifier heatmap \
+  --i-table day8-filtered-table.qza \
+  --i-importance Random_Forest_day8/feature_importance.qza \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv \
+  --m-sample-metadata-column trt \
+  --p-group-samples \
+  --p-feature-count 20 \
+  --o-filtered-table Random_Forest_day8/important-feature-table-top-20.qza \
+  --o-heatmap Random_Forest_day8/important-feature-heatmap.qzv
+
+qiime sample-classifier heatmap \
+--i-table day8-filtered-table.qza \
+--i-importance Random_Forest_day8/feature_importance.qza  \
+--m-sample-metadata-file Agolin-sample-metadata.tsv  \
+--m-sample-metadata-column trt \
+--m-feature-metadata-file taxonomy.qza \
+--m-feature-metadata-column Taxon \
+--p-group-samples  \
+--p-feature-count 20  \
+--o-filtered-table Random_Forest_day8/important-feature-table-taxonomy-top-20.qza \
+--o-heatmap Random_Forest_day8/important-feature-heatmap-taxonomy.qzv
+
+
+#Random Forest
+qiime sample-classifier classify-samples \
+  --i-table day16-filtered-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-optimize-feature-selection \
+  --p-parameter-tuning \
+  --p-estimator RandomForestClassifier \
+  --p-n-estimators 75 \
+  --p-random-state 124 \
+  --output-dir Random_Forest_day16
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day16/predictions.qza \
+  --o-visualization Random_Forest_day16/predictions.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day16/probabilities.qza \
+  --o-visualization Random_Forest_day16/probabilities.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day16/feature_importance.qza \
+  --o-visualization Random_Forest_day16/feature_importance.qzv
+
+qiime feature-table filter-features \
+  --i-table day16-filtered-table.qza \
+  --m-metadata-file Random_Forest_day16/feature_importance.qza \
+  --o-filtered-table Random_Forest_day16/important-feature-table.qza
+
+qiime sample-classifier heatmap \
+  --i-table day16-filtered-table.qza \
+  --i-importance Random_Forest_day16/feature_importance.qza \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv \
+  --m-sample-metadata-column trt \
+  --p-group-samples \
+  --p-feature-count 20 \
+  --o-filtered-table Random_Forest_day16/important-feature-table-top-20.qza \
+  --o-heatmap Random_Forest_day16/important-feature-heatmap.qzv
+
+qiime sample-classifier heatmap \
+--i-table day16-filtered-table.qza \
+--i-importance Random_Forest_day16/feature_importance.qza  \
+--m-sample-metadata-file Agolin-sample-metadata.tsv  \
+--m-sample-metadata-column trt \
+--m-feature-metadata-file taxonomy.qza \
+--m-feature-metadata-column Taxon \
+--p-group-samples  \
+--p-feature-count 20  \
+--o-filtered-table Random_Forest_day16/important-feature-table-taxonomy-top-20.qza \
+--o-heatmap Random_Forest_day16/important-feature-heatmap-taxonomy.qzv
+
+
+
+#Random Forest
+qiime sample-classifier classify-samples \
+  --i-table table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column day \
+  --p-optimize-feature-selection \
+  --p-parameter-tuning \
+  --p-estimator RandomForestClassifier \
+  --p-n-estimators 75 \
+  --p-random-state 124 \
+  --output-dir Random_Forest_day
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day/predictions.qza \
+  --o-visualization Random_Forest_day/predictions.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day/probabilities.qza \
+  --o-visualization Random_Forest_day/probabilities.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day/feature_importance.qza \
+  --o-visualization Random_Forest_day/feature_importance.qzv
+
+qiime feature-table filter-features \
+  --i-table table.qza \
+  --m-metadata-file Random_Forest_day/feature_importance.qza \
+  --o-filtered-table Random_Forest_day/important-feature-table.qza
+
+qiime sample-classifier heatmap \
+  --i-table table.qza \
+  --i-importance Random_Forest_day/feature_importance.qza \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv \
+  --m-sample-metadata-column day \
+  --p-group-samples \
+  --p-feature-count 20 \
+  --o-filtered-table Random_Forest_day/important-feature-table-top-20.qza \
+  --o-heatmap Random_Forest_day/important-feature-heatmap.qzv
+
+qiime sample-classifier heatmap \
+--i-table table.qza \
+--i-importance Random_Forest_day/feature_importance.qza  \
+--m-sample-metadata-file Agolin-sample-metadata.tsv  \
+--m-sample-metadata-column day \
+--m-feature-metadata-file taxonomy.qza \
+--m-feature-metadata-column Taxon \
+--p-group-samples  \
+--p-feature-count 20  \
+--o-filtered-table Random_Forest_day/important-feature-table-taxonomy-top-20.qza \
+--o-heatmap Random_Forest_day/important-feature-heatmap-taxonomy.qzv

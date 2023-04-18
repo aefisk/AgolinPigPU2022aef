@@ -1,0 +1,574 @@
+#Day-14
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table day-14-filtered-table.qza \
+  --p-sampling-depth 10806 \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --output-dir day-14-core-metrics-results
+
+qiime diversity alpha \
+  --i-table day-14-filtered-table.qza \
+  --p-metric chao1 \
+  --o-alpha-diversity day-14-core-metrics-results/chao1_vector.qza
+
+qiime diversity alpha \
+  --i-table day-14-filtered-table.qza \
+  --p-metric simpson \
+  --o-alpha-diversity day-14-core-metrics-results/simpson_vector.qza
+
+#Statistical testing
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-14-core-metrics-results/faith_pd_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-14-core-metrics-results/day-14-faith-pd-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-14-core-metrics-results/evenness_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-14-core-metrics-results/day-14-evenness-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-14-core-metrics-results/shannon_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-14-core-metrics-results/day-14-shannon-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-14-core-metrics-results/observed_features_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-14-core-metrics-results/day-14-observed_features-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-14-core-metrics-results/chao1_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-14-core-metrics-results/day-14-chao1-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-14-core-metrics-results/simpson_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-14-core-metrics-results/day-14-simpson-group-significance.qzv
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day-14-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization day-14-core-metrics-results/day-14-unweighted-unifrac-trt-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day-14-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-method permdisp \
+  --o-visualization day-14-core-metrics-results/day-14-unweighted-unifrac-trt-permdisp.qzv 
+   
+qiime diversity beta-group-significance \
+  --i-distance-matrix day-14-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --o-visualization day-14-core-metrics-results/day-14-unweighted-unifrac-pclass-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day-14-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --p-method permdisp \
+  --o-visualization day-14-core-metrics-results/day-14-unweighted-unifrac-pclass-permdisp.qzv 
+ 
+echo "Make a stacked barplot"
+qiime taxa barplot \
+  --i-table day-14-filtered-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-14-taxa-bar-plots.qzv
+
+#Day-7
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table day-7-filtered-table.qza \
+  --p-sampling-depth 10806 \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --output-dir day-7-core-metrics-results
+
+qiime diversity alpha \
+  --i-table day-7-filtered-table.qza \
+  --p-metric chao1 \
+  --o-alpha-diversity day-7-core-metrics-results/chao1_vector.qza
+
+qiime diversity alpha \
+  --i-table day-7-filtered-table.qza \
+  --p-metric simpson \
+  --o-alpha-diversity day-7-core-metrics-results/simpson_vector.qza
+
+#Statistical testing
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-7-core-metrics-results/faith_pd_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-7-core-metrics-results/day-7-faith-pd-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-7-core-metrics-results/evenness_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-7-core-metrics-results/day-7-evenness-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-7-core-metrics-results/shannon_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-7-core-metrics-results/day-7-shannon-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-7-core-metrics-results/observed_features_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-7-core-metrics-results/day-7-observed_features-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-7-core-metrics-results/chao1_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-7-core-metrics-results/day-7-chao1-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day-7-core-metrics-results/simpson_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-7-core-metrics-results/day-7-simpson-group-significance.qzv
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day-7-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization day-7-core-metrics-results/day-7-unweighted-unifrac-trt-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day-7-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-method permdisp \
+  --o-visualization day-7-core-metrics-results/day-7-unweighted-unifrac-trt-permdisp.qzv  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day-7-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --o-visualization day-7-core-metrics-results/day-7-unweighted-unifrac-pclass-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day-7-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --p-method permdisp \
+  --o-visualization day-7-core-metrics-results/day-7-unweighted-unifrac-pclass-permdisp.qzv 
+
+echo "Make a stacked barplot"
+qiime taxa barplot \
+  --i-table day-7-filtered-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day-7-taxa-bar-plots.qzv
+
+#Day0
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table day0-filtered-table.qza \
+  --p-sampling-depth 10806 \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --output-dir day0-core-metrics-results
+
+qiime diversity alpha \
+  --i-table day0-filtered-table.qza \
+  --p-metric chao1 \
+  --o-alpha-diversity day0-core-metrics-results/chao1_vector.qza
+
+qiime diversity alpha \
+  --i-table day0-filtered-table.qza \
+  --p-metric simpson \
+  --o-alpha-diversity day0-core-metrics-results/simpson_vector.qza
+
+#Statistical testing
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day0-core-metrics-results/faith_pd_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day0-core-metrics-results/day0-faith-pd-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day0-core-metrics-results/evenness_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day0-core-metrics-results/day0-evenness-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day0-core-metrics-results/shannon_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day0-core-metrics-results/day0-shannon-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day0-core-metrics-results/observed_features_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day0-core-metrics-results/day0-observed_features-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day0-core-metrics-results/chao1_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day0-core-metrics-results/day0-chao1-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day0-core-metrics-results/simpson_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day0-core-metrics-results/day0-simpson-group-significance.qzv
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day0-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization day0-core-metrics-results/day0-unweighted-unifrac-trt-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day0-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-method permdisp \
+  --o-visualization day0-core-metrics-results/day0-unweighted-unifrac-trt-permdisp.qzv  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day0-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --o-visualization day0-core-metrics-results/day0-unweighted-unifrac-pclass-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day0-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --p-method permdisp \
+  --o-visualization day0-core-metrics-results/day0-unweighted-unifrac-pclass-permdisp.qzv 
+
+echo "Make a stacked barplot"
+qiime taxa barplot \
+  --i-table day0-filtered-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day0-taxa-bar-plots.qzv
+
+
+#Day8
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table day8-filtered-table.qza \
+  --p-sampling-depth 10806 \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --output-dir day8-core-metrics-results
+
+qiime diversity alpha \
+  --i-table day8-filtered-table.qza \
+  --p-metric chao1 \
+  --o-alpha-diversity day8-core-metrics-results/chao1_vector.qza
+
+qiime diversity alpha \
+  --i-table day8-filtered-table.qza \
+  --p-metric simpson \
+  --o-alpha-diversity day8-core-metrics-results/simpson_vector.qza
+
+#Statistical testing
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day8-core-metrics-results/faith_pd_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day8-core-metrics-results/day8-faith-pd-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day8-core-metrics-results/evenness_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day8-core-metrics-results/day8-evenness-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day8-core-metrics-results/shannon_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day8-core-metrics-results/day8-shannon-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day8-core-metrics-results/observed_features_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day8-core-metrics-results/day8-observed_features-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day8-core-metrics-results/chao1_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day8-core-metrics-results/day8-chao1-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day8-core-metrics-results/simpson_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day8-core-metrics-results/day8-simpson-group-significance.qzv
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day8-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization day8-core-metrics-results/day8-unweighted-unifrac-trt-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day8-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-method permdisp \
+  --o-visualization day8-core-metrics-results/day8-unweighted-unifrac-trt-permdisp.qzv 
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day8-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --o-visualization day8-core-metrics-results/day8-unweighted-unifrac-pclass-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day8-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --p-method permdisp \
+  --o-visualization day8-core-metrics-results/day8-unweighted-unifrac-pclass-permdisp.qzv 
+
+echo "Make a stacked barplot"
+qiime taxa barplot \
+  --i-table day8-filtered-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day8-taxa-bar-plots.qzv
+
+#Day16
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table day16-filtered-table.qza \
+  --p-sampling-depth 10806 \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --output-dir day16-core-metrics-results
+
+qiime diversity alpha \
+  --i-table day16-filtered-table.qza \
+  --p-metric chao1 \
+  --o-alpha-diversity day16-core-metrics-results/chao1_vector.qza
+
+qiime diversity alpha \
+  --i-table day16-filtered-table.qza \
+  --p-metric simpson \
+  --o-alpha-diversity day16-core-metrics-results/simpson_vector.qza
+
+#Statistical testing
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day16-core-metrics-results/faith_pd_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day16-core-metrics-results/day16-faith-pd-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day16-core-metrics-results/evenness_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day16-core-metrics-results/day16-evenness-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day16-core-metrics-results/shannon_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day16-core-metrics-results/day16-shannon-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day16-core-metrics-results/observed_features_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day16-core-metrics-results/day16-observed_features-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day16-core-metrics-results/chao1_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day16-core-metrics-results/day16-chao1-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity day16-core-metrics-results/simpson_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day16-core-metrics-results/day16-simpson-group-significance.qzv
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day16-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization day16-core-metrics-results/day16-unweighted-unifrac-trt-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day16-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-method permdisp \
+  --o-visualization day16-core-metrics-results/day16-unweighted-unifrac-trt-permdisp.qzv 
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day16-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --o-visualization day16-core-metrics-results/day16-unweighted-unifrac-pclass-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix day16-core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --p-method permdisp \
+  --o-visualization day16-core-metrics-results/day16-unweighted-unifrac-pclass-permdisp.qzv 
+
+echo "Make a stacked barplot"
+qiime taxa barplot \
+  --i-table day16-filtered-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization day16-taxa-bar-plots.qzv
+
+ANCOM ANALYSIS
+qiime composition add-pseudocount \
+  --i-table day-14-filtered-table.qza \
+  --o-composition-table comp-day-14-table.qza
+
+qiime composition ancom \
+  --i-table comp-day-14-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization ancom-day-14-trt.qzv
+
+qiime taxa collapse \
+  --i-table day-14-filtered-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-level 6 \
+  --o-collapsed-table day-14-collapsed-table.qza
+
+qiime composition add-pseudocount \
+  --i-table day-14-collapsed-table.qza \
+  --o-composition-table comp-day-14-collapsed-table.qza
+
+qiime composition ancom \
+  --i-table comp-day-14-collapsed-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization comp-day-14-collapsed-trt-table.qzv
+
+qiime composition add-pseudocount \
+  --i-table day-7-filtered-table.qza \
+  --o-composition-table comp-day-7-table.qza
+
+qiime composition ancom \
+  --i-table comp-day-7-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization ancom-day-7-trt.qzv
+
+qiime taxa collapse \
+  --i-table day-7-filtered-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-level 6 \
+  --o-collapsed-table day-7-collapsed-table.qza
+
+qiime composition add-pseudocount \
+  --i-table day-7-collapsed-table.qza \
+  --o-composition-table comp-day-7-collapsed-table.qza
+
+qiime composition ancom \
+  --i-table comp-day-7-collapsed-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization comp-day-7-collapsed-trt-table.qzv
+
+qiime composition add-pseudocount \
+  --i-table day0-filtered-table.qza \
+  --o-composition-table comp-day0-table.qza
+
+qiime composition ancom \
+  --i-table comp-day0-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization ancom-day0-trt.qzv
+
+qiime taxa collapse \
+  --i-table day0-filtered-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-level 6 \
+  --o-collapsed-table day0-collapsed-table.qza
+
+qiime composition add-pseudocount \
+  --i-table day0-collapsed-table.qza \
+  --o-composition-table comp-day0-collapsed-table.qza
+
+qiime composition ancom \
+  --i-table comp-day0-collapsed-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization comp-day0-collapsed-trt-table.qzv
+
+qiime composition add-pseudocount \
+  --i-table day8-filtered-table.qza \
+  --o-composition-table comp-day8-table.qza
+
+qiime composition ancom \
+  --i-table comp-day8-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization ancom-day8-trt.qzv
+
+qiime taxa collapse \
+  --i-table day8-filtered-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-level 6 \
+  --o-collapsed-table day8-collapsed-table.qza
+
+qiime composition add-pseudocount \
+  --i-table day8-collapsed-table.qza \
+  --o-composition-table comp-day8-collapsed-table.qza
+
+qiime composition ancom \
+  --i-table comp-day8-collapsed-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization comp-day8-collapsed-trt-table.qzv
+
+qiime composition add-pseudocount \
+  --i-table day16-filtered-table.qza \
+  --o-composition-table comp-day16-table.qza
+
+qiime composition ancom \
+  --i-table comp-day16-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization ancom-day16-trt.qzv
+
+qiime taxa collapse \
+  --i-table day16-filtered-table.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-level 6 \
+  --o-collapsed-table day16-collapsed-table.qza
+
+qiime composition add-pseudocount \
+  --i-table day16-collapsed-table.qza \
+  --o-composition-table comp-day16-collapsed-table.qza
+
+qiime composition ancom \
+  --i-table comp-day16-collapsed-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization comp-day16-collapsed-trt-table.qzv
+
+
+qiime composition add-pseudocount \
+  --i-table table.qza \
+  --o-composition-table comp-table.qza
+
+qiime composition ancom \
+  --i-table comp-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization ancom-trt.qzv
+
+qiime composition ancom \
+  --i-table comp-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column day \
+  --o-visualization ancom-day.qzv
+

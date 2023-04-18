@@ -1,0 +1,103 @@
+qiime taxa collapse \
+--i-table day-14-filtered-table.qza \
+--o-collapsed-table day-14-collapse.table.qza \
+--p-level 6 \
+--i-taxonomy taxonomy.qza
+
+qiime feature-table relative-frequency \
+--i-table day-14-collapse.table.qza \
+--o-relative-frequency-table day-14-collapse.frequency.table.qza \
+--output-dir day-14-collapse.frequency/
+
+qiime tools export \
+--input-path day-14-collapse.frequency.table.qza \
+--output-path day-14-collapse.frequency/
+
+biom convert \
+-i day-14-collapse.frequency/feature-table.biom \
+-o day-14-collapse.frequency.table.txt \
+--header-key “taxonomy” --to-tsv
+
+
+qiime taxa collapse \
+--i-table day-7-filtered-table.qza \
+--o-collapsed-table day-7-collapse.table.qza \
+--p-level 6 \
+--i-taxonomy taxonomy.qza
+
+qiime feature-table relative-frequency \
+--i-table day-7-collapse.table.qza \
+--o-relative-frequency-table day-7-collapse.frequency.table.qza \
+--output-dir day-7-collapse.frequency/
+
+qiime tools export \
+--input-path day-7-collapse.frequency.table.qza \
+--output-path day-7-collapse.frequency/
+
+biom convert \
+-i day-7-collapse.frequency/feature-table.biom \
+-o day-7-collapse.frequency.table.txt \
+--header-key “taxonomy” --to-tsv
+
+
+qiime taxa collapse \
+--i-table day0-filtered-table.qza \
+--o-collapsed-table day0-collapse.table.qza \
+--p-level 6 \
+--i-taxonomy taxonomy.qza
+
+qiime feature-table relative-frequency \
+--i-table day0-collapse.table.qza \
+--o-relative-frequency-table day0-collapse.frequency.table.qza \
+--output-dir day0-collapse.frequency/
+
+qiime tools export \
+--input-path day0-collapse.frequency.table.qza \
+--output-path day0-collapse.frequency/
+
+biom convert \
+-i day0-collapse.frequency/feature-table.biom \
+-o day0-collapse.frequency.table.txt \
+--header-key “taxonomy” --to-tsv
+
+
+qiime taxa collapse \
+--i-table day8-filtered-table.qza \
+--o-collapsed-table day8-collapse.table.qza \
+--p-level 6 \
+--i-taxonomy taxonomy.qza
+
+qiime feature-table relative-frequency \
+--i-table day8-collapse.table.qza \
+--o-relative-frequency-table day8-collapse.frequency.table.qza \
+--output-dir day8-collapse.frequency/
+
+qiime tools export \
+--input-path day8-collapse.frequency.table.qza \
+--output-path day8-collapse.frequency/
+
+biom convert \
+-i day8-collapse.frequency/feature-table.biom \
+-o day8-collapse.frequency.table.txt \
+--header-key “taxonomy” --to-tsv
+
+
+qiime taxa collapse \
+--i-table day16-filtered-table.qza \
+--o-collapsed-table day16-collapse.table.qza \
+--p-level 6 \
+--i-taxonomy taxonomy.qza
+
+qiime feature-table relative-frequency \
+--i-table day16-collapse.table.qza \
+--o-relative-frequency-table day16-collapse.frequency.table.qza \
+--output-dir day16-collapse.frequency/
+
+qiime tools export \
+--input-path day16-collapse.frequency.table.qza \
+--output-path day16-collapse.frequency/
+
+biom convert \
+-i day16-collapse.frequency/feature-table.biom \
+-o day16-collapse.frequency.table.txt \
+--header-key “taxonomy” --to-tsv

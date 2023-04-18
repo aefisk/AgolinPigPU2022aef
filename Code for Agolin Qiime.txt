@@ -1,0 +1,241 @@
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences rep-seqs-dada2.qza \
+  --o-alignment aligned-rep-seqs.qza \
+  --o-masked-alignment masked-aligned-rep-seqs.qza \
+  --o-tree unrooted-tree.qza \
+  --o-rooted-tree rooted-tree.qza
+
+echo "Rarefaction"
+qiime diversity alpha-rarefaction \
+  --i-table table.qza \
+  --i-phylogeny rooted-tree.qza \
+  --p-max-depth 40334 \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization alpha-rarefaction.qzv
+
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table table.qza \
+  --p-sampling-depth 10806 \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --output-dir core-metrics-results
+
+qiime diversity alpha \
+  --i-table table.qza \
+  --p-metric chao1 \
+  --o-alpha-diversity core-metrics-results/chao1_vector.qza
+
+qiime diversity alpha \
+  --i-table table.qza \
+  --p-metric simpson \
+  --o-alpha-diversity core-metrics-results/simpson_vector.qza
+
+#Statistical testing
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/faith_pd_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization core-metrics-results/faith-pd-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/evenness_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization core-metrics-results/evenness-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/shannon_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization core-metrics-results/shannon-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/observed_features_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization core-metrics-results/observed_features-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/chao1_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization core-metrics-results/chao1-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/simpson_vector.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization core-metrics-results/simpson-group-significance.qzv
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization core-metrics-results/unweighted-unifrac-trt-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --o-visualization core-metrics-results/unweighted-unifrac-trt-permdisp.qzv 
+  --p-method permdisp \  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column day \
+  --o-visualization core-metrics-results/unweighted-unifrac-day-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column day \
+  --o-visualization core-metrics-results/unweighted-unifrac-day-permdisp.qzv 
+  --p-method permdisp \ 
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --o-visualization core-metrics-results/unweighted-unifrac-pclass-significance.qzv \
+  --p-pairwise  
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column pclass \
+  --o-visualization core-metrics-results/unweighted-unifrac-pclass-permdisp.qzv 
+  --p-method permdisp \ 
+
+
+echo "Classify and get .qzv"
+qiime feature-classifier classify-sklearn \
+  --i-classifier gg-13-8-99-515-806-nb-classifier.qza \
+  --i-reads rep-seqs.qza \
+  --o-classification taxonomy.qza
+
+qiime metadata tabulate \
+  --m-input-file taxonomy.qza \
+  --o-visualization taxonomy.qzv
+
+
+echo "Make a stacked barplot"
+qiime taxa barplot \
+  --i-table table.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --o-visualization taxa-bar-plots.qzv
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/jaccard_distance_matrix.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-method permanova \
+  --p-pairwise \
+  --o-visualization core-metrics-results/BETA-frequency-jaccard-group-significance.qzv
+
+BY DAY
+
+bash-4.2$ qiime feature-table filter-samples \
+>   --i-table table.qza \
+>   --m-metadata-file Agolin-sample-metadata.tsv \
+>   --p-where "[day]='-14'" \
+>   --o-filtered-table day-14-filtered-table.qza
+Saved FeatureTable[Frequency] to: day-14-filtered-table.qza
+bash-4.2$ qiime feature-table filter-samples   --i-table table.qza   --m-metadata-file Agolin-sample-metadata.tsv   --p-where "[day]='-7'"   --o-filtered-table day-7-filtered-table.qza  Saved FeatureTable[Frequency] to: day-7-filtered-table.qza
+bash-4.2$ qiime feature-table filter-samples   --i-table table.qza   --m-metadata-file Agolin-sample-metadata.tsv   --p-where "[day]='0'"   --o-filtered-table day0-filtered-table.qza
+Saved FeatureTable[Frequency] to: day0-filtered-table.qza
+bash-4.2$ qiime feature-table filter-samples   --i-table table.qza   --m-metadata-file Agolin-sample-metadata.tsv   --p-where "[day]='8'"   --o-filtered-table day8-filtered-table.qza
+Saved FeatureTable[Frequency] to: day8-filtered-table.qza
+bash-4.2$ qiime feature-table filter-samples   --i-table table.qza   --m-metadata-file Agolin-sample-metadata.tsv   --p-where "[day]='16'"   --o-filtered-table day16-filtered-table.qza
+Saved FeatureTable[Frequency] to: day16-filtered-table.qza
+
+qiime feature-table summarize \
+  --i-table day-14-filtered-table.qza \ 
+  --o-visualization day-14-table.qzv \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv
+
+qiime feature-table summarize \
+  --i-table day-7-filtered-table.qza \
+  --o-visualization day-7-table.qzv \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv
+
+qiime feature-table summarize \
+  --i-table day0-filtered-table.qza \
+  --o-visualization day0-table.qzv \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv
+
+qiime feature-table summarize \
+  --i-table day8-filtered-table.qza \
+  --o-visualization day8-table.qzv \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv
+
+qiime feature-table summarize \
+  --i-table day16-filtered-table.qza \
+  --o-visualization day16-table.qzv \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv
+
+
+
+Random Forest
+qiime sample-classifier classify-samples \
+  --i-table day-14-filtered-table.qza \
+  --m-metadata-file Agolin-sample-metadata.tsv \
+  --m-metadata-column trt \
+  --p-optimize-feature-selection \
+  --p-parameter-tuning \
+  --p-estimator RandomForestClassifier \
+  --p-n-estimators 75 \
+  --p-random-state 124 \
+  --output-dir Random_Forest_day-14
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day-14/predictions.qza \
+  --o-visualization Random_Forest_day-14/predictions.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day-14/probabilities.qza \
+  --o-visualization Random_Forest_day-14/probabilities.qzv
+
+qiime metadata tabulate \
+  --m-input-file Random_Forest_day-14/feature_importance.qza \
+  --o-visualization Random_Forest_day-14/feature_importance.qzv
+
+qiime feature-table filter-features \
+  --i-table day-14-filtered-table.qza \
+  --m-metadata-file Random_Forest_day-14/feature_importance.qza \
+  --o-filtered-table Random_Forest_day-14/important-feature-table.qza
+
+qiime sample-classifier heatmap \
+  --i-table day-14-filtered-table.qza \
+  --i-importance Random_Forest_day-14/feature_importance.qza \
+  --m-sample-metadata-file Agolin-sample-metadata.tsv \
+  --m-sample-metadata-column trt \
+  --p-group-samples \
+  --p-feature-count 30 \
+  --o-filtered-table Random_Forest_day-14/important-feature-table-top-30.qza \
+  --o-heatmap Random_Forest_day-14/important-feature-heatmap.qzv
+
+qiime sample-classifier heatmap \
+--i-table day-14-filtered-table.qza \
+--i-importance Random_Forest_day-14/feature_importance.qza  \
+--m-sample-metadata-file Agolin-sample-metadata.tsv  \
+--m-sample-metadata-column trt \
+--m-feature-metadata-file taxonomy.qza \
+--m-feature-metadata-column Taxon \
+--p-group-samples  \
+--p-feature-count 30  \
+--o-filtered-table Random_Forest_day-14/important-feature-table-taxonomy-top-30.qza \
+--o-heatmap Random_Forest_day-14/important-feature-heatmap-taxonomy.qzv
+
+Cooccurrence
+qiime SCNIC sparcc-filter \
+  --i-table day-14-filtered-table.qza \
+  --o-table-filtered day-14-SCNIC-filtered.qza
+
+qiime SCNIC sparcc-filter \
+  --i-table day-14-SCNIC-filtered.qza \
+  --o-table-filtered day-14-sparCC-filtered.qza
+
+qiime SCNIC calculate-correlations \
+  --i-table day-14-sparCC-filtered.qza \
+  --p-method sparcc \
+  --o-correlation-table day-14-correls.qza
+

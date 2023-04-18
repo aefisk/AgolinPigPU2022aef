@@ -1,0 +1,190 @@
+Lots of limitations to this approach. Think of it as a hypothesis-generating method, not a mechanism of action of a community. 
+
+module use /depot/microbiome/apps/modulefiles
+module load conda-env/qiime2-2021.11-py3.8.5
+
+
+qiime picrust2 full-pipeline \
+   --i-table table.qza \
+   --i-seq rep-seqs.qza \
+   --output-dir q2-picrust2_output \
+   --p-placement-tool sepp \
+   --p-threads 1 \
+   --p-hsp-method pic \
+   --p-max-nsti 2 \
+   --verbose
+
+qiime feature-table summarize \
+   --i-table q2-picrust2_output/pathway_abundance.qza \
+   --o-visualization q2-picrust2_output/pathway_abundance.qzv
+
+qiime diversity core-metrics \
+   --i-table q2-picrust2_output/pathway_abundance.qza \
+   --p-sampling-depth 453233 \
+   --m-metadata-file Agolin-sample-metadata.tsv \
+   --output-dir pathabun_core_metrics_out \
+   --p-n-jobs 1
+
+qiime tools export \
+   --input-path q2-picrust2_output/pathway_abundance.qza \
+   --output-path pathabun_exported
+
+biom convert \
+   -i pathabun_exported/feature-table.biom \
+   -o pathabun_exported/feature-table.biom.tsv \
+   --to-tsv
+
+
+qiime picrust2 full-pipeline \
+   --i-table day-14-filtered-table.qza \
+   --i-seq rep-seqs.qza \
+   --output-dir q2-picrust2_output_day-14 \
+   --p-placement-tool sepp \
+   --p-threads 1 \
+   --p-hsp-method pic \
+   --p-max-nsti 2 \
+   --verbose
+
+qiime feature-table summarize \
+   --i-table q2-picrust2_output_day-14/pathway_abundance.qza \
+   --o-visualization q2-picrust2_output_day-14/pathway_abundance.qzv
+
+qiime diversity core-metrics \
+   --i-table q2-picrust2_output_day-14/pathway_abundance.qza \
+   --p-sampling-depth 820615 \
+   --m-metadata-file Agolin-sample-metadata.tsv \
+   --output-dir  q2-picrust2_output_day-14/pathabun_core_metrics_out \
+   --p-n-jobs 1
+
+qiime tools export \
+   --input-path q2-picrust2_output_day-14/pathway_abundance.qza \
+   --output-path q2-picrust2_output_day-14/pathabun_core_metrics_out/pathabun_exported
+
+biom convert \
+   -i q2-picrust2_output_day-14/pathabun_core_metrics_out/pathabun_exported/feature-table.biom \
+   -o q2-picrust2_output_day-14/pathabun_core_metrics_out/pathabun_exported/feature-table.biom.tsv \
+   --to-tsv
+
+qiime picrust2 full-pipeline \
+   --i-table day-7-filtered-table.qza \
+   --i-seq rep-seqs.qza \
+   --output-dir q2-picrust2_output_day-7 \
+   --p-placement-tool sepp \
+   --p-threads 1 \
+   --p-hsp-method pic \
+   --p-max-nsti 2 \
+   --verbose
+
+qiime feature-table summarize \
+   --i-table q2-picrust2_output_day-7/pathway_abundance.qza \
+   --o-visualization q2-picrust2_output_day-7/pathway_abundance.qzv
+
+qiime diversity core-metrics \
+   --i-table q2-picrust2_output_day-7/pathway_abundance.qza \
+   --p-sampling-depth 1071180 \
+   --m-metadata-file Agolin-sample-metadata.tsv \
+   --output-dir  q2-picrust2_output_day-7/pathabun_core_metrics_out \
+   --p-n-jobs 1
+
+qiime tools export \
+   --input-path q2-picrust2_output_day-7/pathway_abundance.qza \
+   --output-path q2-picrust2_output_day-7/pathabun_core_metrics_out/pathabun_exported
+
+biom convert \
+   -i q2-picrust2_output_day-7/pathabun_core_metrics_out/pathabun_exported/feature-table.biom \
+   -o q2-picrust2_output_day-7/pathabun_core_metrics_out/pathabun_exported/feature-table.biom.tsv \
+   --to-tsv
+
+
+qiime picrust2 full-pipeline \
+   --i-table day0-filtered-table.qza \
+   --i-seq rep-seqs.qza \
+   --output-dir q2-picrust2_output_day-0 \
+   --p-placement-tool sepp \
+   --p-threads 1 \
+   --p-hsp-method pic \
+   --p-max-nsti 2 \
+   --verbose
+
+qiime feature-table summarize \
+   --i-table q2-picrust2_output_day-0/pathway_abundance.qza \
+   --o-visualization q2-picrust2_output_day-0/pathway_abundance.qzv
+
+qiime diversity core-metrics \
+   --i-table q2-picrust2_output_day-0/pathway_abundance.qza \
+   --p-sampling-depth 1162481 \
+   --m-metadata-file Agolin-sample-metadata.tsv \
+   --output-dir  q2-picrust2_output_day-0/pathabun_core_metrics_out \
+   --p-n-jobs 1
+
+qiime tools export \
+   --input-path q2-picrust2_output_day-0/pathway_abundance.qza \
+   --output-path q2-picrust2_output_day-0/pathabun_core_metrics_out/pathabun_exported
+
+biom convert \
+   -i q2-picrust2_output_day-0/pathabun_core_metrics_out/pathabun_exported/feature-table.biom \
+   -o q2-picrust2_output_day-0/pathabun_core_metrics_out/pathabun_exported/feature-table.biom.tsv \
+   --to-tsv
+
+
+qiime picrust2 full-pipeline \
+   --i-table day8-filtered-table.qza \
+   --i-seq rep-seqs.qza \
+   --output-dir q2-picrust2_output_day-8 \
+   --p-placement-tool sepp \
+   --p-threads 1 \
+   --p-hsp-method pic \
+   --p-max-nsti 2 \
+   --verbose
+
+qiime feature-table summarize \
+   --i-table q2-picrust2_output_day-8/pathway_abundance.qza \
+   --o-visualization q2-picrust2_output_day-8/pathway_abundance.qzv
+
+qiime diversity core-metrics \
+   --i-table q2-picrust2_output_day-8/pathway_abundance.qza \
+   --p-sampling-depth 1087613 \
+   --m-metadata-file Agolin-sample-metadata.tsv \
+   --output-dir  q2-picrust2_output_day-8/pathabun_core_metrics_out \
+   --p-n-jobs 1
+
+qiime tools export \
+   --input-path q2-picrust2_output_day-8/pathway_abundance.qza \
+   --output-path q2-picrust2_output_day-8/pathabun_core_metrics_out/pathabun_exported
+
+biom convert \
+   -i q2-picrust2_output_day-8/pathabun_core_metrics_out/pathabun_exported/feature-table.biom \
+   -o q2-picrust2_output_day-8/pathabun_core_metrics_out/pathabun_exported/feature-table.biom.tsv \
+   --to-tsv
+
+
+
+qiime picrust2 full-pipeline \
+   --i-table day16-filtered-table.qza \
+   --i-seq rep-seqs.qza \
+   --output-dir q2-picrust2_output_day-16 \
+   --p-placement-tool sepp \
+   --p-threads 1 \
+   --p-hsp-method pic \
+   --p-max-nsti 2 \
+   --verbose
+
+qiime feature-table summarize \
+   --i-table q2-picrust2_output_day-16/pathway_abundance.qza \
+   --o-visualization q2-picrust2_output_day-16/pathway_abundance.qzv
+
+qiime diversity core-metrics \
+   --i-table q2-picrust2_output_day-16/pathway_abundance.qza \
+   --p-sampling-depth 453233 \
+   --m-metadata-file Agolin-sample-metadata.tsv \
+   --output-dir  q2-picrust2_output_day-16/pathabun_core_metrics_out \
+   --p-n-jobs 1
+
+qiime tools export \
+   --input-path q2-picrust2_output_day-16/pathway_abundance.qza \
+   --output-path q2-picrust2_output_day-16/pathabun_core_metrics_out/pathabun_exported
+
+biom convert \
+   -i q2-picrust2_output_day-16/pathabun_core_metrics_out/pathabun_exported/feature-table.biom \
+   -o q2-picrust2_output_day-16/pathabun_core_metrics_out/pathabun_exported/feature-table.biom.tsv \
+   --to-tsv
